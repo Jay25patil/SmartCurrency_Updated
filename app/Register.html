@@ -1,28 +1,17 @@
 <!DOCTYPE html>
-<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6 lt8"> <![endif]-->
-<!--[if IE 7 ]>    <html lang="en" class="no-js ie7 lt8"> <![endif]-->
-<!--[if IE 8 ]>    <html lang="en" class="no-js ie8 lt8"> <![endif]-->
-<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!-->
-<html lang="en" class="no-js">
-<!--<![endif]-->
+<html>
 
 <head>
-    <meta charset="UTF-8" />
-
-    <title>SmartCurrency</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Login and Registration Form with HTML5 and CSS3" />
-    <meta name="keywords" content="html5, css3, form, switch, animation, :target, pseudo-class" />
-    <meta name="author" content="Codrops" />
+    <title>Smart Currency</title>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <script src="../app.js"></script>
-    <script src="./javascripts/jquery.min.js"></script>
-    <script src="./javascripts/bootstrap.min.js"></script>
+    <!--<script src="./javascripts/jquery.min.js"></script>-->
+    <!--<script src="./javascripts/bootstrap.min.js"></script>-->
     <link href="./stylesheets/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/app.css" />
 </head>
-<nav class="navbar navbar-default">
+
+<body>
+    <nav class="navbar navbar-default">
       <div class="container-fluid centralignHeader">
         <!-- Logo and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -36,50 +25,36 @@
               <img src="../app/image/RapidqubeLogo.jpg">
             </span>
             <span class="navbar-brand centralignHeader">
-              Registration
-           </span>
+              Register
+            </span>
          </div>
+      </div>   
     </nav>
 
-<body>
-    <div class="container">
-        
-                <a href="Login.html" class="current-demo"></a>
+      <div class="container">
 
-            </nav>
-        </header>
-        <section>
-            
+        <form action="Login.html" autocomplete="on">
+        <!--<a href="Login.html" class="to_register"></a>-->
 
-                    <div id="register" class="animate form">
-                        <form action="Login.html" autocomplete="on">
-                            <!--<h1> Sign up </h1>-->
-                            
-                            <p>
-                                <label for="emailsignup" class="youmail">Email</label>
-                                <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="abc@t.com" />
-                            </p>
-                            <p>
-                                <label for="passwordsignup" class="youpasswd" data-icon="p">Password </label>
-                                <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="12345" />
-                            </p>
-                            <p>
-                                <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Confirm password </label>
-                                <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="12345" />
-                            </p>
-                            
-                            <button class="btn btn-primary btn-sx">Sign Up</button>
-                            <p class="change_link">
-                                Already a member ?
-                                <a href="#tologin" class="to_register"> Go and log in </a>
-                            </p>
-                        </form>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-    </div>
+      <br>
+      <label for="emailsignup" class="youmail" > Email </label>
+      <input class="youmail" id="emailsignup" name="emailsignup" required="required" type="email" placeholder="email" />
+      <br>
+      <br>
+      <label for="password" class="youpasswd"> Password </label>
+      <input class="youpasswd" id="passwordsignup" name="password" required="required" type="password" placeholder="password" />
+      <br>
+      <br>
+      <button class="btn btn-primary" id="send" action="Login.html" onclick="App.RegisterUser()">SignUp</button>
+      <br>
+      <br>
+      Already a member ?
+      <a href="Login.html" class="to_register"> Go and log in </a>
+      <span id="RegisterUser"></span>
+      <br>
+      <span id="status"></span>
+      <br>
+        </form>
+      </div class="container">
 </body>
-
 </html>

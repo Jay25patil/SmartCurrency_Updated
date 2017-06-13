@@ -40,11 +40,14 @@ window.App = {
 
             accounts = accs;
             account = accounts[0];
-
-            self.refreshBalance();
-            self.refreshBalance1();
-            self.refreshBalance2();
-        });
+            
+            
+            // self.refreshBalance();
+            // self.refreshBalance1();
+            // self.refreshBalance2();
+             //self.refreshBalance3();
+            // self.accountStatus();
+            });
     },
 
     setStatus: function(message) {
@@ -105,6 +108,87 @@ window.App = {
             console.log(e);
             self.setStatus("Error getting balance; see log.");
         });
+    },
+     refreshBalance3: function() {
+        var self = this;
+
+        var meta;
+
+        SmartCurrency.deployed().then(function(instance) {
+            meta = instance;
+            return meta.AuthenticateUser.call(account, {
+                from: account
+            });
+        }).then(function(value) {
+            var user_element = document.getElementById("emailsignup");
+            user_element.innerHTML = value.valueOf();
+            var user_element1 = document.getElementById("passwordsignup");
+            user_element1.innerHTML = value.valueOf();
+        }).catch(function(e) {
+            //console.log(e);
+            self.setStatus("E");
+        });
+    },
+    
+    RegisterUser: function() {
+        var self = this;
+
+        var email = document.getElementById("emailsignup").value;
+        var password = document.getElementById("passwordsignup").value;
+        console.log("email :" + email);
+        console.log("password :" + password);
+        this.setStatus("Initiating Registration... (please wait)");
+
+        var rapid;
+        SmartCurrency.deployed().then(function(instance) {
+            rapid = instance;
+                return rapid.RegisterUser.call(email, password, {
+                from: account
+            });
+        }).then(function(value) {
+            console.log("value :" + value);
+            self.setStatus("Registration Successfull!.... Please Click on login ref");
+            // self.redirect('/Login');
+
+            //self.refreshBalance3();
+        }).catch(function(e) {
+            //console.log(e);
+            self.setStatus("User Already Exist! Try Diffrent Email");
+        });
+    },
+    
+    AuthenticateUser: function() {
+        var self = this;
+        var _email = document.getElementById("emaillogin").value;
+        var _password = document.getElementById("passwordlogin").value;
+        console.log("email :" + _email);
+        console.log("password :" + _password);
+        this.setStatus("Initiating ... please wait");
+
+        var rapid;
+        SmartCurrency.deployed().then(function(instance) {
+            rapid = instance;
+            console.log("rapid :"+ rapid );
+                return rapid.AuthenticateUser.call(_email, _password, {
+                
+                from: account
+                
+            });
+        }).then(function(value) {
+            console.log("value :" + value);
+            
+            self.setStatus("Login Unsuccessfull!");
+            
+            
+            //self.redirect('/Employee');
+
+            //self.refreshBalance3();
+            
+        }).catch(function(value) {
+            console.log(value);
+            self.setStatus("User Doesn't Exist. Register First");
+        });
+       
     },
 
     SendCoins: function() {

@@ -42,10 +42,10 @@ window.App = {
             account = accounts[0];
             
             
-            // self.refreshBalance();
-            // self.refreshBalance1();
-            // self.refreshBalance2();
-             //self.refreshBalance3();
+             self.refreshBalance();
+             self.refreshBalance1();
+             self.refreshBalance2();
+            //  self.refreshBalance3();
             // self.accountStatus();
             });
     },
@@ -120,17 +120,17 @@ window.App = {
                 from: account
             });
         }).then(function(value) {
-            var user_element = document.getElementById("emailsignup");
-            user_element.innerHTML = value.valueOf();
-            var user_element1 = document.getElementById("passwordsignup");
-            user_element1.innerHTML = value.valueOf();
+            var email_element = document.getElementById("emailsignup");
+            email_element.innerHTML = value.valueOf();
+            var password_element = document.getElementById("passwordsignup");
+            password_element.innerHTML = value.valueOf();
         }).catch(function(e) {
             //console.log(e);
             self.setStatus("E");
         });
     },
     
-    RegisterUser: function() {
+        RegisterUser: function() {
         var self = this;
 
         var email = document.getElementById("emailsignup").value;
@@ -142,25 +142,53 @@ window.App = {
         var rapid;
         SmartCurrency.deployed().then(function(instance) {
             rapid = instance;
-                return rapid.RegisterUser.call(email, password, {
+                var returnRegisterValue = rapid.RegisterUser.call(email, password, {
                 from: account
             });
+            console.log("returnRegisterValue:" + returnRegisterValue);
+            return returnRegisterValue;
         }).then(function(value) {
             console.log("value :" + value);
-            self.setStatus("Registration Successfull!.... Please Click on login ref");
-            // self.redirect('/Login');
-
-            //self.refreshBalance3();
+            
+            if (value==true){
+            
+            alert("Registration Successfull!.... Please Login");
+            //self.redirect('Employee.html');
+            }
+            else{
+                alert("Registration Unsuccessfull!");
+            }
+            
+            //self.redirect('/Login.html');
         }).catch(function(e) {
             //console.log(e);
             self.setStatus("User Already Exist! Try Diffrent Email");
         });
     },
+
+    AddressGenerator:function(){
+        var self = this;
+
+        var meta;
+
+        SmartCurrency.deployed().then(function(instance) {
+            meta = instance;
+            return meta.AddressGenerator.call(account, {
+                from: account
+            });
+        }).then(function(value) {
+            var balance_element = document.getElementById("address");
+            balance_element.innerHTML = value.valueOf();
+        }).catch(function(e) {
+            console.log(e);
+            
+        });
+    },
     
     AuthenticateUser: function() {
         var self = this;
-        var _email = document.getElementById("emaillogin").value;
-        var _password = document.getElementById("passwordlogin").value;
+        var _email = document.getElementById("emailsignup").value;
+        var _password = document.getElementById("passwordsignup").value;
         console.log("email :" + _email);
         console.log("password :" + _password);
         this.setStatus("Initiating ... please wait");
@@ -168,16 +196,23 @@ window.App = {
         var rapid;
         SmartCurrency.deployed().then(function(instance) {
             rapid = instance;
-            console.log("rapid :"+ rapid );
-                return rapid.AuthenticateUser.call(_email, _password, {
+            
+                var returnValue = rapid.AuthenticateUser.call(_email, _password, {
                 
                 from: account
                 
             });
+            console.log("ReturnValue: " + returnValue);
+            return returnValue;
         }).then(function(value) {
             console.log("value :" + value);
-            
-            self.setStatus("Login Unsuccessfull!");
+            if (value==true){
+            alert("Login Unsuccessfull!");
+            //self.redirect('Employee.html');
+            }
+            else{
+                alert("Login Successfull!");
+            }
             
             
             //self.redirect('/Employee');
@@ -190,6 +225,63 @@ window.App = {
         });
        
     },
+
+    is_CoinsLow:function(){
+        var self = this;
+
+        var meta;
+
+        SmartCurrency.deployed().then(function(instance) {
+            meta = instance;
+            return meta.is_CoinsLow.call(account, {
+                from: account
+            });
+        }).then(function(value) {
+            var balance_element = document.getElementById("balance");
+            balance_element.innerHTML = value.valueOf();
+        }).catch(function(e) {
+            console.log(e);
+            self.setStatus("Error getting balance; see log.");
+        });
+    },
+
+    is_SharesLow:function(){
+        var self = this;
+
+        var meta;
+
+        SmartCurrency.deployed().then(function(instance) {
+            meta = instance;
+            return meta.is_SharesLow.call(account, {
+                from: account
+            });
+        }).then(function(value) {
+            var balance_element = document.getElementById("shares");
+            balance_element.innerHTML = value.valueOf();
+        }).catch(function(e) {
+            console.log(e);
+            self.setStatus("Error getting balance; see log.");
+        });
+    },
+     is_LeavesLow:function(){
+        var self = this;
+
+        var meta;
+
+        SmartCurrency.deployed().then(function(instance) {
+            meta = instance;
+            return meta.is_SharesLow.call(account, {
+                from: account
+            });
+        }).then(function(value) {
+            var balance_element = document.getElementById("leaves");
+            balance_element.innerHTML = value.valueOf();
+        }).catch(function(e) {
+            console.log(e);
+            self.setStatus("Error getting balance; see log.");
+        });
+    },
+
 
     SendCoins: function() {
         var self = this;

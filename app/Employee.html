@@ -32,12 +32,24 @@
 
     <div class="container">
       <h2></h2>
-      <h3>You have <span class="black"><span id="balance"></span> RapidCoins</span></h3>
-      <h3>You have <span class="black"><span id="shares"></span> Shares</span></h3>
-      <h3>You have <span class="black"><span id="leaves"></span> Leaves</span></h3>
+      
+     
+     
 
+    <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#Coins">Coins</a></li>
+    <li><a data-toggle="tab" href="#Shares">Shares</a></li>
+    <li><a data-toggle="tab" href="#Leaves">Leaves</a></li>
+    <!--<li><a data-toggle="tab" href="#menu3">Menu 3</a></li>-->
+  </ul>
+
+  <div class="tab-content">
+    <div id="Coins" class="tab-pane fade in active">
+        <h3>You have <span class="black"><span id="balance"></span> RapidCoins</span></h3>
+       <br>
+      <button class="btn btn-primary pull-right" id="send" onclick="App.is_CoinsLow()">ResetCoins</button>
       <br>
-      <h1>Send RapidCoin</h1>
+      <p><h1>Send RapidCoin</h1>
       <br>
       <label for="amount">Amount:</label>
       <input class="form-control" type="text" id="CoinAmount" placeholder="e.g., 95"></input>
@@ -62,10 +74,17 @@
       <button class="btn btn-primary pull-right" id="send" onclick="App.checkBalance()">Check Coins</button>
       <br>
       <br>
+      
       You Have<span id="checkBalance"></span>Coins
-      <br>
+      <br></p>
+    </div>
+    <div id="Shares" class="tab-pane fade">
+       <h3>You have <span class="black"><span id="shares"></span> Shares</span></h3>
 
       <br>
+      <button class="btn btn-primary pull-right" id="send" onclick="App.is_SharesLow()">ResetShares</button>
+      <br>
+      <p> <br>
       <h1>Send Shares</h1>
       <br>
       <label for="amount">Shares:</label>
@@ -93,9 +112,15 @@
       <br>
       You Have<span id="sharesBalance"></span>%Shares
       <br>
-      <br>
+      <br></p>
+    </div>
+    <div id="Leaves" class="tab-pane fade">
+       <h3>You have <span class="black"><span id="leaves"></span> Leaves</span></h3>
 
-      <h1>Grant Leaves</h1>
+      <br>
+      <button class="btn btn-primary pull-right" id="send" onclick="App.is_LeavesLow()">ResetLeaves</button>
+      <br>
+      <p><h1>Grant Leaves</h1>
       <br>
       <label for="amount">Leaves:</label>
       
@@ -124,6 +149,15 @@
       You Have<span id="checkLeaves"></span>Days Leaves
       <br>
       <br>
+</p>
+    </div>
+    
+  </div>
+
+     
+      
+      
+      
 
       <span id="status"></span>
       <br>

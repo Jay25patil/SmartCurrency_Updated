@@ -9,39 +9,62 @@ contract SmartCurrency {
     mapping (address => string)  Credential;
     
     event Transfer(address indexed _from, address indexed _to, uint256 _value);
-    event Register(address sender,string email);
-    event Register1(address sender,string password);
-    event username(address sender, string UserName);
-
+    event Email(address sender,string email);
+    event Password(address sender,string password);
+    
     function SmartCurrency(){
-        balances[tx.origin]=1000;
-        leaves[tx.origin]=10;
-        shares[tx.origin]=10;        
+        balances[tx.origin]= 1000;
+        leaves[tx.origin]= 100;
+        shares[tx.origin]= 100;              
     }
+    
+    function is_CoinsLow() returns (uint){
+        
+         if (balances[tx.origin] == 0 ){
+            return balances[tx.origin]=1000;
+            }
+        }
+
+    function is_SharesLow() returns (uint){
+        if (shares[tx.origin] == 0 ){
+            return shares[tx.origin]= 100;          
+        }
+        }    
+    
+    function is_LeavesLow()returns (uint){
+        if (leaves[tx.origin] == 0 ){
+            return leaves[tx.origin]= 100;
+        }
+        } 
+
 
     function RegisterUser(string email,string password)returns(bool) {
         User[msg.sender]=email;
         Credential[msg.sender]=password;
-        Register(msg.sender,email);
-        Register1(msg.sender,password);
+        Email(msg.sender,email);
+        Password(msg.sender,password);
         return true;
     }
-    
+    function AddressGenerator()external returns (bytes20){
+        uint256 lastBlockNumber = block.number - 1;
+        bytes20 etheraddr = bytes20(block.blockhash(lastBlockNumber));
+        return bytes20(etheraddr);
+    }
     function AuthenticateUser(string _email,string _password)returns (bool) {
     bytes memory email = bytes(_email);
-    bytes Register = bytes(User[msg.sender]);
+    bytes Email = bytes(User[msg.sender]);
     bytes memory password = bytes(_password);
-    bytes Register1 = bytes(Credential[msg.sender]);
-    if (email.length != Register.length && password.length != Register1.length)
+    bytes Password = bytes(Credential[msg.sender]);
+    if (email.length != Email.length )
     return false;
     for (uint i = 0; i < password.length; i ++)
-    if (password[i]!= Register1[i] && email[i]!=Register[i]){
+    if (password[i]!= Password[i]){
     return false;
-    }
-    else{
+    }else{
     return true;
     }
     }
+
     
     function SendCoins(address receiver,uint amount)returns(bool sufficient){
         if (balances[msg.sender] < amount) return false;

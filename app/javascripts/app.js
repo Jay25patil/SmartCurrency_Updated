@@ -43,8 +43,8 @@ window.App = {
             
             
              self.refreshBalance();
-             self.refreshBalance1();
-             self.refreshBalance2();
+             self.refreshShares();
+             self.refreshLeaves();
             //  self.refreshBalance3();
             // self.accountStatus();
             });
@@ -73,7 +73,7 @@ window.App = {
             self.setStatus("Error getting balance; see log.");
         });
     },
-    refreshBalance1: function() {
+    refreshShares: function() {
         var self = this;
 
         var meta;
@@ -91,7 +91,7 @@ window.App = {
             self.setStatus("Error getting balance; see log.");
         });
     },
-    refreshBalance2: function() {
+    refreshLeaves: function() {
         var self = this;
 
         var meta;
@@ -179,13 +179,14 @@ window.App = {
         }).then(function(value) {
             var balance_element = document.getElementById("address");
             balance_element.innerHTML = value.valueOf();
+            // alert("Keep Your Account Number Safe");
         }).catch(function(e) {
             console.log(e);
             
         });
     },
     
-    AuthenticateUser: function() {
+    AuthenticateUser: function LogIn() {
         var self = this;
         var _email = document.getElementById("emailsignup").value;
         var _password = document.getElementById("passwordsignup").value;
@@ -223,59 +224,62 @@ window.App = {
             console.log(value);
             self.setStatus("User Doesn't Exist. Register First");
         });
-       
     },
 
-    is_CoinsLow:function(){
+    ResetCoins:function(){
         var self = this;
 
         var meta;
 
         SmartCurrency.deployed().then(function(instance) {
             meta = instance;
-            return meta.is_CoinsLow.call(account, {
+            return meta.ResetCoin.call(account, {
                 from: account
             });
         }).then(function(value) {
             var balance_element = document.getElementById("balance");
             balance_element.innerHTML = value.valueOf();
+            //self.refreshBalance();
         }).catch(function(e) {
             console.log(e);
             self.setStatus("Error getting balance; see log.");
         });
     },
 
-    is_SharesLow:function(){
+    ResetShares:function(){
         var self = this;
 
         var meta;
 
         SmartCurrency.deployed().then(function(instance) {
             meta = instance;
-            return meta.is_SharesLow.call(account, {
+            return meta.ResetShare.call(account, {
                 from: account
             });
         }).then(function(value) {
             var balance_element = document.getElementById("shares");
             balance_element.innerHTML = value.valueOf();
+            //self.refreshShares();
         }).catch(function(e) {
             console.log(e);
             self.setStatus("Error getting balance; see log.");
         });
     },
-     is_LeavesLow:function(){
+     ResetLeaves:function(){
         var self = this;
 
         var meta;
 
         SmartCurrency.deployed().then(function(instance) {
             meta = instance;
-            return meta.is_SharesLow.call(account, {
+            return meta.ResetLeave.call(account, {
                 from: account
             });
         }).then(function(value) {
             var balance_element = document.getElementById("leaves");
             balance_element.innerHTML = value.valueOf();
+            //self.refreshLeaves();
+
         }).catch(function(e) {
             console.log(e);
             self.setStatus("Error getting balance; see log.");
@@ -298,6 +302,8 @@ window.App = {
                 from: account
             });
         }).then(function(value) {
+            var balance_element = document.getElementById("SendCoins");
+            balance_element.innerHTML = value.valueOf();
             self.setStatus("Transaction complete!");
             self.refreshBalance();
         }).catch(function(e) {
@@ -342,7 +348,7 @@ window.App = {
             });
         }).then(function(value) {
             self.setStatus("Transaction complete!");
-            self.refreshBalance1();
+            self.refreshShares();
         }).catch(function(e) {
             console.log(e);
             self.setStatus("Error sending coin; see log.");
@@ -386,7 +392,7 @@ window.App = {
             });
         }).then(function(value) {
             self.setStatus("Transaction complete!");
-            self.refreshBalance2();
+            self.refreshLeaves();
         }).catch(function(e) {
             console.log(e);
             self.setStatus("Error sending coin; see log.");

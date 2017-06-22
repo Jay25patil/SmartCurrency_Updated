@@ -12,155 +12,156 @@
 
 <body>
     <nav class="navbar navbar-default">
-      <div class="container-fluid centralignHeader">
-        <!-- Logo and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-            <span class="navbar-left imagesize">
+        <div class="container-fluid centralignHeader">
+            <!-- Logo and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <span class="navbar-left imagesize">
               <img src="../app/image/RapidqubeLogo.jpg">
             </span>
-            <span class="navbar-brand centralignHeader">
+                <span class="navbar-brand centralignHeader">
               Employee Benefit Program
            </span>
-         </div>
+            </div>
     </nav>
 
     <div class="container">
-      <h2></h2>
-      
-     
-     
+        <h2></h2>
+         <button class="btn btn-primary pull-right" id="redirect" onclick="window.location='Login.html'">Logout</button>
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#Coins">Coins</a></li>
+            <li><a data-toggle="tab" href="#Shares">Shares</a></li>
+            <li><a data-toggle="tab" href="#Leaves">Leaves</a></li>
+           
+            <!--<li><a data-toggle="tab" href="#menu3">Menu 3</a></li>-->
+        </ul>
 
-    <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#Coins">Coins</a></li>
-    <li><a data-toggle="tab" href="#Shares">Shares</a></li>
-    <li><a data-toggle="tab" href="#Leaves">Leaves</a></li>
-    <!--<li><a data-toggle="tab" href="#menu3">Menu 3</a></li>-->
-  </ul>
+        <div class="tab-content">
+            <div id="Coins" class="tab-pane fade in active">
+                <h3>You have <span class="black"><span id="balance"></span> RapidCoins</span></h3>
+                <br>
+                <button class="btn btn-primary pull-centre" id="send" onclick="App.ResetCoins()">ResetCoins</button>
+                <br>
+                <p>
+                    <h1>Send RapidCoin</h1>
+                    <br>
+                    <label for="amount">Amount:</label>
+                    <input class="form-control" type="text" id="CoinAmount" placeholder="e.g., 95"></input>
+                    <br>
+                    <label for="receiver">Account:</label>
+                    <input class="form-control" type="text" id="sendCoinReceiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
+                    <br>
+                    <br>
+                    <button class="btn btn-primary pull-centre" id="send" onclick="App.SendCoins()">Send Coins</button>
+                    <br>
+                    <br>
+                    <span id="SendCoins"></span>
+                   <!--<h3>You have sent  <span id="SendCoins"></span> Coins </h3>-->
+                    <br>
+                    <br>
 
-  <div class="tab-content">
-    <div id="Coins" class="tab-pane fade in active">
-        <h3>You have <span class="black"><span id="balance"></span> RapidCoins</span></h3>
-       <br>
-      <button class="btn btn-primary pull-right" id="send" onclick="App.is_CoinsLow()">ResetCoins</button>
-      <br>
-      <p><h1>Send RapidCoin</h1>
-      <br>
-      <label for="amount">Amount:</label>
-      <input class="form-control" type="text" id="CoinAmount" placeholder="e.g., 95"></input>
-      <br>
-      <label for="receiver">Account:</label>
-      <input class="form-control" type="text" id="sendCoinReceiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
-      <br>
-      <br>
-      <button class="btn btn-primary pull-right" id="send" onclick="App.SendCoins()">Send Coins</button>
-      <br>
-      <br>
-      <span id="SendCoins"></span>
-      <br>
+                    <br>
+                    <h1>Check RapidCoin</h1>
+                    <br>
+                    <label for="receiver">Account:</label>
+                    <input class="form-control" type="text" id="coinReceiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
+                    <br>
+                    <br>
+                    <button class="btn btn-primary pull-centre" id="send" onclick="App.checkBalance()">Check Coins</button>
+                    <br>
+                    <br>
 
-      <br>
-      <h1>Check RapidCoin</h1>
-      <br>
-      <label for="receiver">Account:</label>
-      <input class="form-control" type="text" id="coinReceiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
-      <br>
-      <br>
-      <button class="btn btn-primary pull-right" id="send" onclick="App.checkBalance()">Check Coins</button>
-      <br>
-      <br>
-      
-      You Have<span id="checkBalance"></span>Coins
-      <br></p>
-    </div>
-    <div id="Shares" class="tab-pane fade">
-       <h3>You have <span class="black"><span id="shares"></span> Shares</span></h3>
+                    <h3>You Have<span id="checkBalance"></span> Coins</h3>
+                    <br>
+                </p>
+            </div>
+            <div id="Shares" class="tab-pane fade">
+                <h3>You have <span class="black"><span id="shares"></span> Shares</span></h3>
 
-      <br>
-      <button class="btn btn-primary pull-right" id="send" onclick="App.is_SharesLow()">ResetShares</button>
-      <br>
-      <p> <br>
-      <h1>Send Shares</h1>
-      <br>
-      <label for="amount">Shares:</label>
-      <input class="form-control" type="text" id="ShareAmount" placeholder="e.g., 95"></input>
-      <br>
-      <label for="receiver">Account:</label>
-      <input class="form-control" type="text" id="sendShareReceiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
-      <br>
-      <br>
-      <button class="btn btn-primary pull-right" id="send" onclick="App.SendShares()">Send Shares</button>
-      <br>
-      <br>
-      <span id="SendShares"></span>
-      <br>
+                <br>
+                <button class="btn btn-primary pull-centre" id="send" onclick="App.ResetShares()">ResetShares</button>
+                <br>
+                <p>
+                    <br>
+                    <h1>Send Shares</h1>
+                    <br>
+                    <label for="amount">Shares:</label>
+                    <input class="form-control" type="text" id="ShareAmount" placeholder="e.g., 95"></input>
+                    <br>
+                    <label for="receiver">Account:</label>
+                    <input class="form-control" type="text" id="sendShareReceiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
+                    <br>
+                    <br>
+                    <button class="btn btn-primary pull-centre" id="send" onclick="App.SendShares()">Send Shares</button>
+                    <br>
+                    <br>
+                    <span id="SendShares"></span>
+                    <br>
 
-      <br>
-      <h1>Check Shares</h1>
-      <br>
-      <label for="shareReceiver">Account:</label>
-      <input class="form-control" type="text" id="shareReceiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
-      <br>
-      <br>
-      <button class="btn btn-primary pull-right" id="shareSend" onclick="App.checkShares()">Check Shares</button>
-      <br>
-      <br>
-      You Have<span id="sharesBalance"></span>%Shares
-      <br>
-      <br></p>
-    </div>
-    <div id="Leaves" class="tab-pane fade">
-       <h3>You have <span class="black"><span id="leaves"></span> Leaves</span></h3>
+                    <br>
+                    <h1>Check Shares</h1>
+                    <br>
+                    <label for="shareReceiver">Account:</label>
+                    <input class="form-control" type="text" id="shareReceiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
+                    <br>
+                    <br>
+                    <button class="btn btn-primary pull-centre" id="shareSend" onclick="App.checkShares()">Check Shares</button>
+                    <br>
+                    <br>
+                    <h3>You Have <span id="sharesBalance"></span> %Shares</h3>
+                    <br>
+                    <br>
+                </p>
+            </div>
+            <div id="Leaves" class="tab-pane fade">
+                <h3>You have <span class="black"><span id="leaves"></span> Leaves</span></h3>
 
-      <br>
-      <button class="btn btn-primary pull-right" id="send" onclick="App.is_LeavesLow()">ResetLeaves</button>
-      <br>
-      <p><h1>Grant Leaves</h1>
-      <br>
-      <label for="amount">Leaves:</label>
-      
-      <input class="form-control" type="text" id="LeaveAmount" placeholder="e.g., 95"></input>
-      <br>
-      <label for="receiver">Account:</label>
-      <input class="form-control" type="text" id="sendLeaveReceiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
-      <br>
-      <br>
-      <button class="btn btn-primary pull-right" id="send" onclick="App.GrantLeaves()">Send Leaves</button>
-      <br>
-      <br>
-      <span id="GrantLeaves"></span>
-      <br>
-      <br>
+                <br>
+                <button class="btn btn-primary pull-centre" id="send" onclick="App.ResetLeaves()">ResetLeaves</button>
+                <br>
+                <p>
+                    <h1>Grant Leaves</h1>
+                    <br>
+                    <label for="amount">Leaves:</label>
 
-      <h1>Check Leaves</h1>
-      <br>
-      <label for="receiver">Account:</label>
-      <input class="form-control" type="text" id="leaveReceiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
-      <br>
-      <br>
-      <button class="btn btn-primary pull-right" id="send" onclick="App.checkLeaves()">Checkleaves</button>
-      <br>
-      <br>
-      You Have<span id="checkLeaves"></span>Days Leaves
-      <br>
-      <br>
-</p>
-    </div>
-    
-  </div>
+                    <input class="form-control" type="text" id="LeaveAmount" placeholder="e.g., 95"></input>
+                    <br>
+                    <label for="receiver">Account:</label>
+                    <input class="form-control" type="text" id="sendLeaveReceiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
+                    <br>
+                    <br>
+                    <button class="btn btn-primary pull-centre" id="send" onclick="App.GrantLeaves()">Send Leaves</button>
+                    <br>
+                    <br>
+                    <span id="GrantLeaves"></span>
+                    <br>
+                    <br>
 
-     
-      
-      
-      
+                    <h1>Check Leaves</h1>
+                    <br>
+                    <label for="receiver">Account:</label>
+                    <input class="form-control" type="text" id="leaveReceiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
+                    <br>
+                    <br>
+                    <button class="btn btn-primary pull-centre" id="send" onclick="App.checkLeaves()">Checkleaves</button>
+                    <br>
+                    <br>
+                    <h3>You Have <span id="checkLeaves"></span> Days Leaves</h3>
+                    <br>
+                    <br>
+                </p>
+            </div>
 
-      <span id="status"></span>
-      <br>
+        </div>
+
+        <span id="status"></span>
+        <br>
     </div class="container">
 </body>
+
 </html>

@@ -12,30 +12,68 @@ contract SmartCurrency {
     event Email(address sender,string email);
     event Password(address sender,string password);
     
+    
     function SmartCurrency(){
-        balances[tx.origin]= 1000;
-        leaves[tx.origin]= 100;
-        shares[tx.origin]= 100;              
+        balances[tx.origin]= ResetCoin();
+        leaves[tx.origin]= ResetLeave();
+        shares[tx.origin]= ResetShare();          
+    }
+
+    function ResetCoin()returns (uint){
+        
+        return (balances[tx.origin]=1000);
+        RefreshCoins();
     }
     
-    function is_CoinsLow() returns (uint){
+     function ResetShare()returns (uint){
+        return (shares[tx.origin]=100);
+        RefreshShares();
+    }
+    
+    function ResetLeave()returns (uint){
+        return (leaves[tx.origin]=100);
+        RefreshLeaves();
+    }
+    
+    
+    function is_CoinsLow()internal returns (uint){
         
          if (balances[tx.origin] == 0 ){
-            return balances[tx.origin]=1000;
-            }
-        }
+            return (balances[tx.origin]=1000);
 
-    function is_SharesLow() returns (uint){
+        }
+    }
+    function is_SharesLow()internal returns (uint){
         if (shares[tx.origin] == 0 ){
-            return shares[tx.origin]= 100;          
+            return (shares[tx.origin]=100);
+            
         }
-        }    
+    }    
     
-    function is_LeavesLow()returns (uint){
+    function is_LeavesLow()internal returns (uint){
         if (leaves[tx.origin] == 0 ){
-            return leaves[tx.origin]= 100;
+           return (leaves[tx.origin]=100);
         }
+    }
+    
+    function RefreshCoins()internal {
+        if(now>= 60 seconds){
+          is_CoinsLow();
         } 
+        
+    }
+        
+    function RefreshShares()internal {
+        if(now>= 60 seconds){
+           is_SharesLow();
+        } 
+    }
+        
+    function RefreshLeaves()internal {
+        if(now>= 60 seconds){
+           is_LeavesLow();
+        } 
+    }
 
 
     function RegisterUser(string email,string password)returns(bool) {
@@ -45,11 +83,13 @@ contract SmartCurrency {
         Password(msg.sender,password);
         return true;
     }
+    
     function AddressGenerator()external returns (bytes20){
         uint256 lastBlockNumber = block.number - 1;
         bytes20 etheraddr = bytes20(block.blockhash(lastBlockNumber));
         return bytes20(etheraddr);
     }
+    
     function AuthenticateUser(string _email,string _password)returns (bool) {
     bytes memory email = bytes(_email);
     bytes Email = bytes(User[msg.sender]);
@@ -65,7 +105,6 @@ contract SmartCurrency {
     }
     }
 
-    
     function SendCoins(address receiver,uint amount)returns(bool sufficient){
         if (balances[msg.sender] < amount) return false;
         balances[msg.sender] -= amount;
@@ -79,6 +118,7 @@ contract SmartCurrency {
         return balances[addr];
     }
      
+    
     function SendShares(address receiver,uint amount)returns(bool sufficient){
         if (shares[msg.sender] < amount) return false;
         shares[msg.sender] -= amount;

@@ -1,17 +1,17 @@
-var mysql=require('mysql');
-var connection=mysql.createConnection({
+var mysql = require('mysql');
+var connection = mysql.createConnection({
 
-host:'localhost',
-user:'root',
-password:'rpqb123',
-database:'smartcurrency_dev'
+    host: 'localhost',
+    user: 'root',
+    password: 'rpqb123',
+    database: 'smartcurrency_dev'
 });
 connection.connect();
 
-connection.query('select * from user_detail',function(err,result){
-if(err){
-console.error(err);
-return;
-}
-console.error(result);
+connection.query('select * from user_detail', function(err, result) {
+    if (err) {
+        console.error(err);
+        return;
+    }
+    console.error(result);
 });

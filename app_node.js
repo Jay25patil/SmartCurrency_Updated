@@ -1,4 +1,4 @@
-var express = require('express'); 
+var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 
@@ -12,8 +12,7 @@ app.use(cors());
 //router.use('/service',require('./service'));
 // module.exports=router;
 
- app.listen('8081', function () {
+app.listen('8080', function() {
 
     console.log("server is running");
-
 });

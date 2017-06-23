@@ -7,6 +7,16 @@ contract SmartCurrency {
     mapping (address => uint256) leaves;
     mapping (address => string)  User;
     mapping (address => string)  Credential;
+    mapping ( address => Usr ) Users;
+
+     address[] usersByAddress;
+     
+    struct Usr {
+    string email;
+    string password;
+    string ethereum_address;
+    
+  }
     
     event Transfer(address indexed _from, address indexed _to, uint256 _value);
     event Email(address sender,string email);
@@ -76,13 +86,25 @@ contract SmartCurrency {
     }
 
 
-    function RegisterUser(string email,string password)returns(bool) {
-        User[msg.sender]=email;
-        Credential[msg.sender]=password;
-        Email(msg.sender,email);
-        Password(msg.sender,password);
+    // function RegisterUser(string email,string password)returns(bool) {
+    //     User[msg.sender]=email;
+    //     Credential[msg.sender]=password;
+    //     Email(msg.sender,email);
+    //     Password(msg.sender,password);
+    //     return true;
+    // }
+    function RegisterUser(string email, string password, string ethereum_address) returns (bool success) {
+        address thisNewAddress = msg.sender;
+        if(bytes(Users[msg.sender].email).length == 0 && bytes(email).length != 0){
+        Users[thisNewAddress].email = email;
+        Users[thisNewAddress].password = password;
+        Users[thisNewAddress].ethereum_address = ethereum_address;
+        usersByAddress.push(thisNewAddress);  // adds an entry for this user to the user 'whitepages'
         return true;
-    }
+        } else {
+        return false; // either handle was null, or a user with this handle already existed
+         }
+         }
     
     function AddressGenerator()external returns (bytes20){
         uint256 lastBlockNumber = block.number - 1;
@@ -90,20 +112,20 @@ contract SmartCurrency {
         return bytes20(etheraddr);
     }
     
-    function AuthenticateUser(string _email,string _password)returns (bool) {
-    bytes memory email = bytes(_email);
-    bytes Email = bytes(User[msg.sender]);
-    bytes memory password = bytes(_password);
-    bytes Password = bytes(Credential[msg.sender]);
-    if (email.length != Email.length )
-    return false;
-    for (uint i = 0; i < password.length; i ++)
-    if (password[i]!= Password[i]){
-    return false;
-    }else{
-    return true;
-    }
-    }
+    // function AuthenticateUser(string _email,string _password)returns (bool) {
+    // bytes memory email = bytes(_email);
+    // bytes Email = bytes(User[msg.sender]);
+    // bytes memory password = bytes(_password);
+    // bytes Password = bytes(Credential[msg.sender]);
+    // if (email.length != Email.length )
+    // return false;
+    // for (uint i = 0; i < password.length; i ++)
+    // if (password[i]!= Password[i]){
+    // return false;
+    // }else{
+    // return true;
+    // }
+    // }
 
     function SendCoins(address receiver,uint amount)returns(bool sufficient){
         if (balances[msg.sender] < amount) return false;

@@ -2,7 +2,8 @@
 import "../stylesheets/app.css";
 
 // Import libraries we need.
-import { default as Web3
+import {
+    default as Web3
 } from 'web3';
 import { default as contract } from 'truffle-contract'
 
@@ -40,14 +41,14 @@ window.App = {
 
             accounts = accs;
             account = accounts[0];
-            
-            
-             self.refreshBalance();
-             self.refreshShares();
-             self.refreshLeaves();
+
+
+            self.refreshBalance();
+            self.refreshShares();
+            self.refreshLeaves();
             //  self.refreshBalance3();
             // self.accountStatus();
-            });
+        });
     },
 
     setStatus: function(message) {
@@ -109,7 +110,7 @@ window.App = {
             self.setStatus("Error getting balance; see log.");
         });
     },
-     refreshBalance3: function() {
+    refreshBalance3: function() {
         var self = this;
 
         var meta;
@@ -129,36 +130,37 @@ window.App = {
             self.setStatus("E");
         });
     },
-    
-        RegisterUser: function() {
+
+    RegisterUser: function() {
         var self = this;
 
         var email = document.getElementById("emailsignup").value;
         var password = document.getElementById("passwordsignup").value;
+        var ethereum_address = document.getElementById("address").value;
         console.log("email :" + email);
         console.log("password :" + password);
+        console.log("ethereum_address :" + ethereum_address);
         this.setStatus("Initiating Registration... (please wait)");
 
         var rapid;
         SmartCurrency.deployed().then(function(instance) {
             rapid = instance;
-                var returnRegisterValue = rapid.RegisterUser.call(email, password, {
+            var returnRegisterValue = rapid.RegisterUser.call(email, password, ethereum_address, {
                 from: account
             });
             console.log("returnRegisterValue:" + returnRegisterValue);
             return returnRegisterValue;
         }).then(function(value) {
             console.log("value :" + value);
-            
-            if (value==true){
-            
-            alert("Registration Successfull!.... Please Login");
-            //self.redirect('Employee.html');
-            }
-            else{
+
+            if (value == true) {
+                window.location.href = "http://login.com";
+                alert("Registration Successfull!.... Please Login");
+                //self.redirect('Employee.html');
+            } else {
                 alert("Registration Unsuccessfull!");
             }
-            
+
             //self.redirect('/Login.html');
         }).catch(function(e) {
             //console.log(e);
@@ -166,7 +168,7 @@ window.App = {
         });
     },
 
-    AddressGenerator:function(){
+    AddressGenerator: function() {
         var self = this;
 
         var meta;
@@ -182,10 +184,10 @@ window.App = {
             // alert("Keep Your Account Number Safe");
         }).catch(function(e) {
             console.log(e);
-            
+
         });
     },
-    
+
     AuthenticateUser: function LogIn() {
         var self = this;
         var _email = document.getElementById("emailsignup").value;
@@ -197,36 +199,35 @@ window.App = {
         var rapid;
         SmartCurrency.deployed().then(function(instance) {
             rapid = instance;
-            
-                var returnValue = rapid.AuthenticateUser.call(_email, _password, {
-                
+
+            var returnValue = rapid.AuthenticateUser.call(_email, _password, {
+
                 from: account
-                
+
             });
             console.log("ReturnValue: " + returnValue);
             return returnValue;
         }).then(function(value) {
             console.log("value :" + value);
-            if (value==true){
-            alert("Login Unsuccessfull!");
-            //self.redirect('Employee.html');
-            }
-            else{
+            if (value == true) {
+                alert("Login Unsuccessfull!");
+                //self.redirect('Employee.html');
+            } else {
                 alert("Login Successfull!");
             }
-            
-            
+
+
             //self.redirect('/Employee');
 
             //self.refreshBalance3();
-            
+
         }).catch(function(value) {
             console.log(value);
             self.setStatus("User Doesn't Exist. Register First");
         });
     },
 
-    ResetCoins:function(){
+    ResetCoins: function() {
         var self = this;
 
         var meta;
@@ -246,7 +247,7 @@ window.App = {
         });
     },
 
-    ResetShares:function(){
+    ResetShares: function() {
         var self = this;
 
         var meta;
@@ -265,7 +266,7 @@ window.App = {
             self.setStatus("Error getting balance; see log.");
         });
     },
-     ResetLeaves:function(){
+    ResetLeaves: function() {
         var self = this;
 
         var meta;
@@ -423,16 +424,16 @@ window.App = {
 };
 
 window.addEventListener('load', function() {
-  // Checking if Web3 has been injected by the browser (Mist/MetaMask)
-  if (typeof web3 !== 'undefined') {
-    console.warn("Using web3 detected from external source. If you find that your accounts don't appear or you have 0 MetaCoin, ensure you've configured that source properly. If using MetaMask, see the following link. Feel free to delete this warning. :) http://truffleframework.com/tutorials/truffle-and-metamask")
-    // Use Mist/MetaMask's provider
-    window.web3 = new Web3(web3.currentProvider);
-  } else {
-    console.warn("No web3 detected. Falling back to http://localhost:8545. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask");
-    // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-    window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-  }
+    // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+    if (typeof web3 !== 'undefined') {
+        console.warn("Using web3 detected from external source. If you find that your accounts don't appear or you have 0 MetaCoin, ensure you've configured that source properly. If using MetaMask, see the following link. Feel free to delete this warning. :) http://truffleframework.com/tutorials/truffle-and-metamask")
+            // Use Mist/MetaMask's provider
+        window.web3 = new Web3(web3.currentProvider);
+    } else {
+        console.warn("No web3 detected. Falling back to http://localhost:8545. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask");
+        // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+        window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+    }
 
-  App.start();
+    App.start();
 });

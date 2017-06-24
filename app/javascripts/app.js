@@ -159,6 +159,8 @@ window.App = {
                 //self.redirect('Employee.html');
             } else {
                 alert("Registration Unsuccessfull!");
+                window.location.href = "http://template.com";
+
             }
 
             //self.redirect('/Login.html');

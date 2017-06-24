@@ -76,13 +76,13 @@
                     </div>
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-left">
-                           
+
                             </li>
                         </ul>
 
                         <ul class="nav navbar-nav navbar-right">
-                            
-                           
+
+
                             <li>
                                 <a href="login.html">
                                     <p>Log out</p>
@@ -92,95 +92,98 @@
                         </ul>
                     </div>
                     <div class="container">
-        <h2></h2>
-        <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#Coins">Coins</a></li>
-            <li><a data-toggle="tab" href="#Shares">Shares</a></li>
-            <li><a data-toggle="tab" href="#Leaves">Leaves</a></li>
-           
-            <!--<li><a data-toggle="tab" href="#menu3">Menu 3</a></li>-->
-        </ul>
+                        <h2></h2>
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#Coins">Coins</a></li>
+                            <li><a data-toggle="tab" href="#Shares">Shares</a></li>
+                            <li><a data-toggle="tab" href="#Leaves">Leaves</a></li>
 
-        <div class="tab-content">
-            <div id="Coins" class="tab-pane fade in active">
-                <h3>You have <span class="black"><span id="balance"></span> RapidCoins</span></h3>
-                <br>
-                
-                <br>
-                <p>
-                    <h1>Share Coins</h1>
-                    <br>
-                    <label for="amount">Amount:</label>
-                    <input class="form-control" type="text" id="CoinAmount" placeholder="e.g., 95"></input>
-                    <br>
-                    <label for="receiver">Account:</label>
-                    <input class="form-control" type="text" id="sendCoinReceiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
-                    <br>
-                    <br>
-                    <button class="btn btn-primary pull-centre" id="send" onclick="App.SendCoins()">Send Coins</button>
-                    <br>
-                    <br>
-                    <span id="SendCoins"></span>
-                   <!--<h3>You have sent  <span id="SendCoins"></span> Coins </h3>-->
-                    <br>
-                    <br>
-                </p>
-            </div>
-            <div id="Shares" class="tab-pane fade">
-                <h3>You have <span class="black"><span id="shares"></span> Shares</span></h3>
+                            <!--<li><a data-toggle="tab" href="#menu3">Menu 3</a></li>-->
+                        </ul>
 
-                <br>
-               
-                <br>
-                <p>
-                    <br>
-                    <h1>Use Shares</h1>
-                    <br>
-                    <label for="amount">Shares:</label>
-                    <input class="form-control" type="text" id="ShareAmount" placeholder="e.g., 95"></input>
-                    <br>
-                    <label for="receiver">Account:</label>
-                    <input class="form-control" type="text" id="sendShareReceiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
-                    <br>
-                    <br>
-                    <button class="btn btn-primary pull-centre" id="send" onclick="App.SendShares()">Send Shares</button>
-                    <br>
-                    <br>
-                    <span id="SendShares"></span>
-                    <br>
-                </p>
-            </div>
-            <div id="Leaves" class="tab-pane fade">
-                <h3>You have <span class="black"><span id="leaves"></span> Leaves</span></h3>
+                        <div class="tab-content">
+                            <div id="Coins" class="tab-pane fade in active">
+                                <h3>You have <span class="black"><span id="balance"></span> RapidCoins</span>
+                                </h3>
+                                <br>
 
-                <br>
-               
-                <br>
-                <p>
-                    <h1>Share Leaves</h1>
-                    <br>
-                    <label for="amount">Leaves:</label>
+                                <br>
+                                <p>
+                                    <h1>Share Coins</h1>
+                                    <br>
+                                    <label for="amount">Amount:</label>
+                                    <input class="form-control" type="text" id="CoinAmount" placeholder="e.g., 95"></input>
+                                    <br>
+                                    <label for="receiver">Account:</label>
+                                    <input class="form-control" type="text" id="sendCoinReceiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
+                                    <br>
+                                    <br>
+                                    <button class="btn btn-primary pull-centre" id="send" onclick="App.SendCoins()">Send Coins</button>
+                                    <br>
+                                    <br>
+                                    <span id="SendCoins"></span>
+                                    <!--<h3>You have sent  <span id="SendCoins"></span> Coins </h3>-->
+                                    <br>
+                                    <br>
+                                </p>
+                            </div>
+                            <div id="Shares" class="tab-pane fade">
+                                <h3>You have <span class="black"><span id="shares"></span> Shares</span>
+                                </h3>
 
-                    <input class="form-control" type="text" id="LeaveAmount" placeholder="e.g., 95"></input>
-                    <br>
-                    <label for="receiver">Account:</label>
-                    <input class="form-control" type="text" id="sendLeaveReceiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
-                    <br>
-                    <br>
-                    <button class="btn btn-primary pull-centre" id="send" onclick="App.GrantLeaves()">Send Leaves</button>
-                    <br>
-                    <br>
-                    <span id="GrantLeaves"></span>
-                    <br>
-                    <br>
-                </p>
-            </div>
+                                <br>
 
-        </div>
+                                <br>
+                                <p>
+                                    <br>
+                                    <h1>Use Shares</h1>
+                                    <br>
+                                    <label for="amount">Shares:</label>
+                                    <input class="form-control" type="text" id="ShareAmount" placeholder="e.g., 95"></input>
+                                    <br>
+                                    <label for="receiver">Account:</label>
+                                    <input class="form-control" type="text" id="sendShareReceiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
+                                    <br>
+                                    <br>
+                                    <button class="btn btn-primary pull-centre" id="send" onclick="App.SendShares()">Send Shares</button>
+                                    <br>
+                                    <br>
+                                    <span id="SendShares"></span>
+                                    <br>
+                                </p>
+                            </div>
+                            <div id="Leaves" class="tab-pane fade">
+                                <h3>You have <span class="black"><span id="leaves"></span> Leaves</span>
+                                </h3>
 
-        <span id="status"></span>
-        <br>
-    </div class="container">
+                                <br>
+
+                                <br>
+                                <p>
+                                    <h1>Share Leaves</h1>
+                                    <br>
+                                    <label for="amount">Leaves:</label>
+
+                                    <input class="form-control" type="text" id="LeaveAmount" placeholder="e.g., 95"></input>
+                                    <br>
+                                    <label for="receiver">Account:</label>
+                                    <input class="form-control" type="text" id="sendLeaveReceiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
+                                    <br>
+                                    <br>
+                                    <button class="btn btn-primary pull-centre" id="send" onclick="App.GrantLeaves()">Send Leaves</button>
+                                    <br>
+                                    <br>
+                                    <span id="GrantLeaves"></span>
+                                    <br>
+                                    <br>
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <span id="status"></span>
+                        <br>
+                    </div class="container">
                 </div>
             </nav>
 
@@ -225,15 +228,6 @@
 
 <!--  Checkbox, Radio & Switch Plugins -->
 <script src="assets/js/bootstrap-checkbox-radio-switch.js"></script>
-
-<!--  Charts Plugin -->
-<script src="assets/js/chartist.min.js"></script>
-
-<!--  Notifications Plugin    -->
-<script src="assets/js/bootstrap-notify.js"></script>
-
-<!--  Google Maps Plugin    -->
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
 <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
 <script src="assets/js/light-bootstrap-dashboard.js"></script>

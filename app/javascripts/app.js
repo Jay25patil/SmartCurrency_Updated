@@ -1,6 +1,7 @@
 // Import the page's CSS. Webpack will know what to do with it.
 import "../stylesheets/app.css";
 
+
 // Import libraries we need.
 import {
     default as Web3
@@ -85,8 +86,8 @@ window.App = {
                 from: account
             });
         }).then(function(value) {
-            var balance_element = document.getElementById("shares");
-            balance_element.innerHTML = value.valueOf();
+            var share_element = document.getElementById("shares");
+            share_element.innerHTML = value.valueOf();
         }).catch(function(e) {
             console.log(e);
             self.setStatus("Error getting balance; see log.");
@@ -103,8 +104,8 @@ window.App = {
                 from: account
             });
         }).then(function(value) {
-            var balance_element = document.getElementById("leaves");
-            balance_element.innerHTML = value.valueOf();
+            var leave_element = document.getElementById("leaves");
+            leave_element.innerHTML = value.valueOf();
         }).catch(function(e) {
             console.log(e);
             self.setStatus("Error getting balance; see log.");
@@ -131,43 +132,67 @@ window.App = {
         });
     },
 
+    // RegisterUser: function() {
+    //     var self = this;
+
+    //     var email = document.getElementById("emailsignup").value;
+    //     var password = document.getElementById("passwordsignup").value;
+    //     var ethereum_address = document.getElementById("address").value;
+    //     var dataString = { "email": "email", "password": "password", "ethaddress": "ethaddress" };
+
+    //     console.log("email :" + email);
+    //     console.log("password :" + password);
+    //     console.log("ethereum_address :" + ethereum_address);
+    //     this.setStatus("Initiating Registration... (please wait)");
+
+    //     var rapid;
+    //     SmartCurrency.deployed().then(function(instance) {
+    //         rapid = instance;
+    //         var returnRegisterValue = rapid.RegisterUser.call(email, password, ethereum_address, {
+    //             from: account
+    //         });
+    //         console.log("returnRegisterValue:" + returnRegisterValue);
+    //         return returnRegisterValue;
+    //     }).then(function(value) {
+    //         console.log("value :" + value);
+
+    //         if (value == true) {
+    //             window.location.href = "http://login.com";
+    //             alert("Registration Successfull!.... Please Login");
+    //             //self.redirect('Employee.html');
+    //         } else {
+    //             alert("Registration Unsuccessfull!");
+    //             window.location.href = "http://template.com";
+
+    //         }
+
+    //         //self.redirect('/Login.html');
+    //     }).catch(function(e) {
+    //         //console.log(e);
+    //         self.setStatus("User Already Exist! Try Diffrent Email");
+    //     });
+    // },
     RegisterUser: function() {
-        var self = this;
-
-        var email = document.getElementById("emailsignup").value;
-        var password = document.getElementById("passwordsignup").value;
-        var ethereum_address = document.getElementById("address").value;
+        var http = new XMLHttpRequest();
+        var url = "http://localhost:8080/smartcurrency/user/create";
+        // var data = "email" + email & "password" + password & "ethaddress" + ethaddress;
+        var email = encodeURIComponent(document.getElementById("emailsignup").value)
         console.log("email :" + email);
-        console.log("password :" + password);
-        console.log("ethereum_address :" + ethereum_address);
-        this.setStatus("Initiating Registration... (please wait)");
+        var password = encodeURIComponent(document.getElementById("passwordsignup").value)
+        var addresss = encodeURIComponent(document.getElementById("address").value)
+        var parameters = "name" + email + "&password=" + password + "&address" + addresss
+        http.open("POST", url, true);
 
-        var rapid;
-        SmartCurrency.deployed().then(function(instance) {
-            rapid = instance;
-            var returnRegisterValue = rapid.RegisterUser.call(email, password, ethereum_address, {
-                from: account
-            });
-            console.log("returnRegisterValue:" + returnRegisterValue);
-            return returnRegisterValue;
-        }).then(function(value) {
-            console.log("value :" + value);
+        //Send the proper header information along with the request
+        http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-            if (value == true) {
-                window.location.href = "http://login.com";
-                alert("Registration Successfull!.... Please Login");
-                //self.redirect('Employee.html');
-            } else {
-                alert("Registration Unsuccessfull!");
-                window.location.href = "http://template.com";
-
+        http.onreadystatechange = function() { //Call a function when the state changes.
+                if (http.readyState == 4 && http.status == 200) {
+                    alert(http.responseText);
+                }
             }
-
-            //self.redirect('/Login.html');
-        }).catch(function(e) {
-            //console.log(e);
-            self.setStatus("User Already Exist! Try Diffrent Email");
-        });
+            // xhr.send('user=person&pwd=password&organization=place&requiredkey=key');
+        http.send(parameters);
     },
 
     AddressGenerator: function() {
@@ -181,8 +206,8 @@ window.App = {
                 from: account
             });
         }).then(function(value) {
-            var balance_element = document.getElementById("address");
-            balance_element.innerHTML = value.valueOf();
+            var address_receiver = document.getElementById("address");
+            address_receiver.innerHTML = value.valueOf();
             // alert("Keep Your Account Number Safe");
         }).catch(function(e) {
             console.log(e);
@@ -260,8 +285,8 @@ window.App = {
                 from: account
             });
         }).then(function(value) {
-            var balance_element = document.getElementById("shares");
-            balance_element.innerHTML = value.valueOf();
+            var share_element = document.getElementById("shares");
+            share_element.innerHTML = value.valueOf();
             //self.refreshShares();
         }).catch(function(e) {
             console.log(e);
@@ -279,8 +304,8 @@ window.App = {
                 from: account
             });
         }).then(function(value) {
-            var balance_element = document.getElementById("leaves");
-            balance_element.innerHTML = value.valueOf();
+            var leave_element = document.getElementById("leaves");
+            leave_element.innerHTML = value.valueOf();
             //self.refreshLeaves();
 
         }).catch(function(e) {
@@ -370,8 +395,8 @@ window.App = {
                 from: account
             });
         }).then(function(value) {
-            var balance_element = document.getElementById("sharesBalance");
-            balance_element.innerHTML = value.valueOf();
+            var share_element = document.getElementById("sharesBalance");
+            share_element.innerHTML = value.valueOf();
         }).catch(function(e) {
             console.log(e);
             self.setStatus("Error getting balance; see log.");
@@ -414,8 +439,8 @@ window.App = {
                 from: account
             });
         }).then(function(value) {
-            var balance_element = document.getElementById("checkLeaves");
-            balance_element.innerHTML = value.valueOf();
+            var leave_element = document.getElementById("checkLeaves");
+            leave_element.innerHTML = value.valueOf();
         }).catch(function(e) {
             console.log(e);
             self.setStatus("Error getting balance; see log.");

@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href="assets/img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
+    <script src="../app.js"></script>
     <title>SmartCurrency</title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -91,34 +91,36 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="container">
-                            <form action="login.html">
+                            <table>
+                                <!--<form action="login.html">-->
 
-                                <!--<form action="Eth_address.html" autocomplete="on">-->
-                                <!--<a href="GenerateAddress.html" class="to_register"></a>-->
+                                <form action="http://localhost:8080/smartcurrency/user/create" method="post">
+                                    <!--<a href="GenerateAddress.html" class="to_register"></a>-->
 
-                                <br>
-                                <label for="email" class="youmail"> Email </label>
-                                <input class="youmail" id="emailsignup" name="email" required="required" type="email" placeholder="email" />
-                                <br>
-                                <br>
-                                <label for="password" class="youpasswd"> Password </label>
-                                <input class="youpasswd" id="passwordsignup" name="password" required="required" type="password" placeholder="password" />
-                                <br>
-                                <br>
-                                <label for="ethaddress">Eth_address:</label>
-                                <input type="text" id="address" placeholder=""></input>
-                                <br>
-                                <br>
-                                <button class="btn btn-primary" id="send" action="login.html" onclick="App.RegisterUser()">Register</button>
-                                <br>
-                                <br> Already a member ?
-                                <a href="login.html" class="to_register"> Go and log in </a>
-                                <span id="RegisterUser"></span>
-                                <br>
-                                <span id="status"></span>
-                                <br>
-                            </form>
-                            </form>
+                                    <br>
+                                    <label for="email" class="youmail"> Email </label>
+                                    <input class="youmail" id="emailsignup" name="email" required="required" type="email" placeholder="email" />
+                                    <br>
+                                    <br>
+                                    <label for="password" class="youpasswd"> Password </label>
+                                    <input class="youpasswd" id="passwordsignup" name="password" required="required" type="password" placeholder="password" />
+                                    <br>
+                                    <br>
+                                    <label for="ethaddress">Eth_address:</label>
+                                    <input type="text" id="address" placeholder=""></input>
+                                    <br>
+                                    <br>
+                                    <button class="btn btn-primary" id="send" action="login.html" onclick="App.RegisterUser()">Register</button>
+                                    <br>
+                                    <br> Already a member ?
+                                    <a href="login.html" class="to_register"> Go and log in </a>
+                                    <span id="RegisterUser"></span>
+                                    <br>
+                                    <span id="status"></span>
+                                    <br>
+                                </form>
+                                <!--</form>-->
+                            </table>
                         </div class="container">
                     </div>
                 </div>

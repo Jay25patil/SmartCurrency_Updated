@@ -1,8 +1,8 @@
 pragma solidity ^0.4.4;
 
 
-contract SmartCurrency {
-    mapping (address => uint256) shares; // stores the data into contract address.
+    contract SmartCurrency {
+    mapping (address => uint256) shares; // stores data into contract address.
     mapping (address => uint256) balances;
     mapping (address => uint256) leaves;
     mapping (address => string)  User_Email;
@@ -21,12 +21,12 @@ contract SmartCurrency {
   }
     //events invoked when the function is called
 
-    event Transfer(address indexed _from, address indexed _to, uint256 _value); 
-    event Email(address sender,string email);
-    event Password(address sender,string password);
+    event Transfer(address indexed _from, address indexed _to, uint256 _value); //transfer amount from to receiver 
+    event Email(address sender,string email); // sends userinput from senders address.
+    event Password(address sender,string password); // sends userinput from senders address.
     
     // stores the coin details
-    function SmartCurrency(){
+    function Storage(){
         balances[tx.origin]= ResetCoin();
         leaves[tx.origin]= ResetLeave();
         shares[tx.origin]= ResetShare();          
@@ -157,20 +157,20 @@ contract SmartCurrency {
 
     
     function checkshares(address addr) returns(uint) {
-        return shares[addr]; // returns balance of reciever.
+        return shares[addr]; // returns shares  balance of reciever.
     }
 
     function GrantLeaves(address receiver,uint amount)returns(bool sufficient){
-         if(leaves[msg.sender] < amount) return false;
-         leaves[msg.sender] -= amount;
-         leaves[receiver] += amount;
-         Transfer(msg.sender, receiver, amount);
+         if(leaves[msg.sender] < amount) return false; // checks Leaves is not 0.
+         leaves[msg.sender] -= amount; // deducts  balance from Sender.
+         leaves[receiver] += amount;  // increments  balance of  receiver.
+         Transfer(msg.sender, receiver, amount); // event transfer gets called.
          return true;
         
     }
     
     function checkleaves(address addr) returns(uint) {        
-        return leaves[addr];
+        return leaves[addr]; // returns Leaves  balance of reciever.
     }
 
 }   

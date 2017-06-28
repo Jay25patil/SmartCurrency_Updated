@@ -26,7 +26,7 @@ pragma solidity ^0.4.4;
     event Password(address sender,string password); // sends userinput from senders address.
     
     // stores the coin details
-    function Storage(){
+    function SmartCurrency(){
         balances[tx.origin]= ResetCoin();
         leaves[tx.origin]= ResetLeave();
         shares[tx.origin]= ResetShare();          

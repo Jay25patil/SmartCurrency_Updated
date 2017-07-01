@@ -10,8 +10,10 @@ import { default as contract } from 'truffle-contract'
 // Import our contract artifacts and turn them into usable abstractions.
 import smartcurrency_artifacts from '../../build/contracts/SmartCurrency.json'
 
+
 // MetaCoin is our usable abstraction, which we'll use through the code below.
 var SmartCurrency = contract(smartcurrency_artifacts);
+// var Account = contract(account_artifacts);
 
 // The following code is simple to show off interacting with your contracts.
 // As your needs grow you will likely need to change its form and structure.
@@ -46,6 +48,9 @@ window.App = {
             self.refreshBalance();
             self.refreshShares();
             self.refreshLeaves();
+            self.refreshBalance1();
+            self.refreshShares2();
+            self.refreshLeaves3();
             //  self.refreshBalance3();
             // self.accountStatus();
         });
@@ -110,26 +115,62 @@ window.App = {
             // self.setStatus("Error getting balance; see log.");
         });
     },
-    refreshBalance3: function() {
+    refreshBalance1: function() {
         var self = this;
 
         var meta;
 
         SmartCurrency.deployed().then(function(instance) {
             meta = instance;
-            return meta.AuthenticateUser.call(account, {
+            return meta.getBalance1.call(account, {
                 from: account
             });
         }).then(function(value) {
-            var email_element = document.getElementById("emailsignup");
-            email_element.innerHTML = value.valueOf();
-            var password_element = document.getElementById("passwordsignup");
-            password_element.innerHTML = value.valueOf();
+            var balance_element = document.getElementById("balance1");
+            balance_element.innerHTML = value.valueOf();
+            1
         }).catch(function(e) {
-            //console.log(e);
-            self.setStatus("E");
+            console.log(e);
+            // self.setStatus("Error getting balance; see log.");
         });
     },
+    refreshShares2: function() {
+        var self = this;
+
+        var meta;
+
+        SmartCurrency.deployed().then(function(instance) {
+            meta = instance;
+            return meta.checkshares1.call(account, {
+                from: account
+            });
+        }).then(function(value) {
+            var balance_element = document.getElementById("shares1");
+            balance_element.innerHTML = value.valueOf();
+        }).catch(function(e) {
+            console.log(e);
+            // self.setStatus("Error getting balance; see log.");
+        });
+    },
+    refreshLeaves3: function() {
+        var self = this;
+
+        var meta;
+
+        SmartCurrency.deployed().then(function(instance) {
+            meta = instance;
+            return meta.checkleaves1.call(account, {
+                from: account
+            });
+        }).then(function(value) {
+            var balance_element = document.getElementById("leaves1");
+            balance_element.innerHTML = value.valueOf();
+        }).catch(function(e) {
+            console.log(e);
+            // self.setStatus("Error getting balance; see log.");
+        });
+    },
+
 
     RegisterUser: function() {
         var self = this;
@@ -253,7 +294,7 @@ window.App = {
 
         SmartCurrency.deployed().then(function(instance) {
             meta = instance;
-            return meta.ResetShare.call(account, {
+            return meta.ResetShares.call(account, {
                 from: account
             });
         }).then(function(value) {
@@ -272,7 +313,7 @@ window.App = {
 
         SmartCurrency.deployed().then(function(instance) {
             meta = instance;
-            return meta.ResetLeave.call(account, {
+            return meta.ResetLeaves.call(account, {
                 from: account
             });
         }).then(function(value) {
@@ -306,6 +347,7 @@ window.App = {
             balance_element.innerHTML = value.valueOf();
             self.setStatus("Transaction complete!");
             self.refreshBalance();
+
         }).catch(function(e) {
             console.log(e);
             self.setStatus("Error sending coin; see log.");
@@ -418,7 +460,138 @@ window.App = {
             self.setStatus("Error getting balance; see log.");
         });
     },
+    SendCoin: function() {
+        var self = this;
 
+        var amount = parseInt(document.getElementById("CoinAmount").value);
+        var receiver = document.getElementById("sendCoinReceiver").value;
+
+        this.setStatus("Initiating transaction... (please wait)");
+
+        var rapid;
+        SmartCurrency.deployed().then(function(instance) {
+            rapid = instance;
+            return rapid.SendCoin(receiver, amount, {
+                from: account
+            });
+        }).then(function(value) {
+            var balance_element = document.getElementById("SendCoins");
+            balance_element.innerHTML = value.valueOf();
+            self.setStatus("Transaction complete!");
+            self.refreshBalance1();
+
+        }).catch(function(e) {
+            console.log(e);
+            self.setStatus("Error sending coin; see log.");
+        });
+    },
+
+    checkBalances: function() {
+        var self = this;
+        var rapid;
+        SmartCurrency.deployed().then(function(instance) {
+            rapid = instance;
+            var coinAddress = document.getElementById("coinReceiver").value;
+
+            console.log("Coin Address: " + coinAddress);
+            return rapid.getBalance1.call(coinAddress, {
+                from: account
+            });
+        }).then(function(value) {
+            var balance_element = document.getElementById("checkBalance");
+            balance_element.innerHTML = value.valueOf();
+        }).catch(function(e) {
+            console.log(e);
+            self.setStatus("Error getting balance; see log.");
+        });
+    },
+
+    SendShare: function() {
+        var self = this;
+
+        var amount = parseInt(document.getElementById("ShareAmount").value);
+        var receiver = document.getElementById("sendShareReceiver").value;
+
+        this.setStatus("Initiating transaction... (please wait)");
+
+        var rapid;
+        SmartCurrency.deployed().then(function(instance) {
+            rapid = instance;
+            return rapid.SendShares(receiver, amount, {
+                from: account
+            });
+        }).then(function(value) {
+            self.setStatus("Transaction complete!");
+            self.refreshShares1();
+        }).catch(function(e) {
+            console.log(e);
+            self.setStatus("Error sending coin; see log.");
+        });
+    },
+
+    checkShare: function() {
+        var self = this;
+        var rapid;
+        SmartCurrency.deployed().then(function(instance) {
+            rapid = instance;
+            var shareAddress = document.getElementById("shareReceiver").value;
+
+            console.log("Share Address: " + shareAddress);
+            return rapid.checkshares1.call(shareAddress, {
+                from: account
+            });
+        }).then(function(value) {
+            var balance_element = document.getElementById("sharesBalance");
+            balance_element.innerHTML = value.valueOf();
+        }).catch(function(e) {
+            console.log(e);
+            self.setStatus("Error getting balance; see log.");
+        });
+    },
+
+    GrantLeave: function() {
+        var self = this;
+
+        var amount = parseInt(document.getElementById("LeaveAmount").value);
+        var receiver = document.getElementById("sendLeaveReceiver").value;
+
+        this.setStatus("Initiating transaction... (please wait)");
+        console.log("Leave Sending: " + receiver + " " + amount);
+
+        var rapid;
+        SmartCurrency.deployed().then(function(instance) {
+            rapid = instance;
+            return rapid.GrantLeaves(receiver, amount, {
+                from: account
+            });
+        }).then(function(value) {
+            self.setStatus("Transaction complete!");
+            self.refreshLeaves1();
+        }).catch(function(e) {
+            console.log(e);
+            self.setStatus("Error sending coin; see log.");
+        });
+    },
+
+    checkLeave: function() {
+        var self = this;
+        var rapid;
+        SmartCurrency.deployed().then(function(instance) {
+            rapid = instance;
+            var leaveAddress = document.getElementById("leaveReceiver").value;
+
+            console.log("Leave Address: " + leaveAddress);
+            return rapid.checkleaves1.call(leaveAddress, {
+                from: account
+            });
+        }).then(function(value) {
+            var balance_element = document.getElementById("checkLeaves");
+            balance_element.innerHTML = value.valueOf();
+        }).catch(function(e) {
+            console.log(e);
+            self.setStatus("Error getting balance; see log.");
+        });
+    },
 
 };
 

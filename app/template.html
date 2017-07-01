@@ -94,7 +94,7 @@
                             <table>
                                 <!--<form action="login.html">-->
 
-                                <form id="submit_form">
+                                <form id="submit_form" href="login.html">
                                     <!--<a href="GenerateAddress.html" class="to_register"></a>-->
 
                                     <br>
@@ -110,7 +110,7 @@
                                     <input type="text" id="address" name="ethaddress" placeholder="ethereum Address"></input>
                                     <br>
                                     <br>
-                                    <button class="btn btn-primary" id="submit" name="submit" value="submit" onclick="App.RegisterUser">Register</button>
+                                    <button class="btn btn-primary" id="submit" name="submit" value="submit" onclick="App.AddressGenerator()">Register</button>
                                     <br>
                                     <br> Before Registration Please Get Your ethereum address
                                     <a href="Eth_address.html" class="to_register"> Get It Now </a>
@@ -179,6 +179,7 @@
                     success: function(data) {
                         $('form').trigger("reset");
                         $('#Response').fadeIn().html(data);
+                        window.location = "login.html"
                         setTimeout(function() {
                             $('#response').fadeOut("slow");
                         }, 5000);

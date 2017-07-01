@@ -26,77 +26,32 @@ pragma solidity ^0.4.4;
     event Password(address sender,string password); // sends userinput from senders address.
     
     // stores the coin details
-    function SmartCurrency(){
-        balances[tx.origin]= ResetCoin();
-        leaves[tx.origin]= ResetLeave();
-        shares[tx.origin]= ResetShare();          
+   function SmartCurrency(){
+        balances[msg.sender]= Resetbalance();
+        leaves[msg.sender]= ResetShares();
+        shares[msg.sender]= ResetLeaves();        
     }
 
-    //this function resets the coin balance 
-    function ResetCoin()returns (uint){
-        
-        return (balances[tx.origin]=1000);
-        RefreshCoins();
-    }
-        
-    //this function resets the shares balance 
-
-     function ResetShare()returns (uint){
-        return (shares[tx.origin]=100);
-        RefreshShares();
-    }
-    
-        
-    //this function resets the Leaves balance 
-
-    function ResetLeave()returns (uint){
-        return (leaves[tx.origin]=100);
-        RefreshLeaves();
-    }
-    
-    // gets called when the coins are 0.
-    function is_CoinsLow()internal returns (uint){
-        
-         if (balances[tx.origin] == 0 ){
-            return (balances[tx.origin]=1000);
-
+    function Resetbalance() returns (uint balance){
+        if(balances[msg.sender]<1){
+        balance=balances[msg.sender]+=1000;
+        return balance;
         }
-    }
-
-    // gets called when the Shares are 0.
-    function is_SharesLow()internal returns (uint){
-        if (shares[tx.origin] == 0 ){
-            return (shares[tx.origin]=100);
-            
-        }
-    }    
+        
+    } 
     
-    // gets called when the Leaves are 0.
-    function is_LeavesLow()internal returns (uint){
-        if (leaves[tx.origin] == 0 ){
-           return (leaves[tx.origin]=100);
+    function ResetShares() returns (uint share){
+        if(shares[msg.sender]<1){
+            share=shares[msg.sender]+=100;
         }
     }
     
-    // gets called internally when coins are low.
-    function RefreshCoins()internal {
-        if(now>= 60 seconds){
-          is_CoinsLow();
-        } 
-        
-    }
-        
-    function RefreshShares()internal {
-        if(now>= 60 seconds){
-           is_SharesLow();
-        } 
-    }
-        
-    function RefreshLeaves()internal {
-        if(now>= 60 seconds){
-           is_LeavesLow();
-        } 
-    }
+    
+    function ResetLeaves()returns (uint leave){
+        if (leaves[msg.sender]<1){
+            leave=leaves[msg.sender]+=100;
+        }
+    }  
 
     function RegisterUser(string email, string password, string ethereum_address) returns (bool success) {
         address NewUser = msg.sender; //stores the new users details in address.

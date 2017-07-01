@@ -226,14 +226,14 @@ window.App = {
         });
     },
 
-    ResetCoins: function() {
+    Resetbalance: function() {
         var self = this;
 
         var meta;
 
         SmartCurrency.deployed().then(function(instance) {
             meta = instance;
-            return meta.ResetCoin.call(account, {
+            return meta.Resetbalance.call(account, {
                 from: account
             });
         }).then(function(value) {

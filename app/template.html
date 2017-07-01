@@ -110,7 +110,7 @@
                                     <input type="text" id="address" name="ethaddress" placeholder="ethereum Address"></input>
                                     <br>
                                     <br>
-                                    <button class="btn btn-primary" id="submit" name="submit" value="submit" action="login.html">Register</button>
+                                    <button class="btn btn-primary" id="submit" name="submit" value="submit" onclick="App.RegisterUser">Register</button>
                                     <br>
                                     <br> Before Registration Please Get Your ethereum address
                                     <a href="Eth_address.html" class="to_register"> Get It Now </a>
@@ -162,7 +162,7 @@
 <script>
     $(document).ready(function() {
         $('#submit').click(function() {
-            alert("he you clicked me!!!")
+            alert("hey you are registered now!!!")
             var email = $('#email').val();
             var password = $('#password').val();
             var ethaddress = $('#ethaddress').val();

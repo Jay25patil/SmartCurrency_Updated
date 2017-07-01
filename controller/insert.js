@@ -38,15 +38,15 @@ router.post("/user/create", function(req, res) {
         });
     });
 });
-router.post("/user/login", function(req, res) {
+router.post("/user/login", cors(), function(req, res) {
     var objBD = BD();
     objBD.connect()
+    console.log(req.body);
     var email = req.body.email;
     var password = req.body.password;
     objBD.query('SELECT * FROM user_detail WHERE email = ?', [email], function(error, results, fields) {
         console.log("results:" + JSON.stringify(results));
-        console.log("fields:" + fields);
-
+        //console.log("fields:" + fields);
         if (error) {
             // console.log("error ocurred",error);
 
@@ -56,8 +56,12 @@ router.post("/user/login", function(req, res) {
             })
         } else {
             // console.log('The solution is: ', results);
-            if (results.length > 0) {
-                if (results[0].password == password) {
+            var resultLength = JSON.parse(JSON.stringify(results));
+            //console.log("Length: " + resultLength.length);
+            if (resultLength.length > 0) {
+                console.log("Password: " + resultLength[0].password);
+                console.log("PasswordUI: " + password);
+                if (resultLength[0].password === password) {
                     res.send({
                         "code": 200,
                         "success": "login sucessfull"

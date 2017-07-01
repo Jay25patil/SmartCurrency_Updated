@@ -156,19 +156,33 @@
 </html>
 <script>
     $(document).ready(function() {
-        $('#submit').click(function() {
-            alert("Hello")
-            var email = $('#emaillogin').val();
-            var password = $('#passwordlogin').val();
 
-            if (email == "") {
-                $('#display').slideDown().html("<span>Please type Username</span>");
-                return false;
-            }
-            if (password == "") {
-                $('#display').slideDown().html('<span id="error">Please type Password</span>');
-                return false;
-            }
+        $("#submit").click(function() {
+            alert("Hey ")
+            email = $("#emaillogin").val();
+            password = $("#passwordlogin").val();
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8081/smartcurrency/user/login",
+                data: {
+                    "email": email,
+                    "password": password
+                },
+                success: function(html) {
+                    console.log(html);
+                    if (html == '200') {
+                        //$("#add_err").html("right username or password");
+                        window.location = "dashboard.html";
+                    } else {
+                        $("#response").html("<img src='images/alert.png' />Wrong username or password");
+                    }
+                },
+                beforeSend: function() {
+
+                    $("#response").html("<img src='images/ajax-loader.gif' /> Loading...")
+                }
+            });
+            return false;
         });
     });
 </script>

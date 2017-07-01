@@ -109,7 +109,7 @@
                                     <h3>You have <span class="black"><span id="balance"></span> RapidCoins</span>
                                     </h3>
                                     <br>
-                                    <button class="btn btn-primary pull-centre" id="send" onclick="App.Resetbalance()">ResetCoins</button>
+                                    <button class="btn btn-primary pull-centre" id="send" onclick="App.ResetCoins()">ResetCoins</button>
                                     <br>
                                     <p>
                                         <h1>Send RapidCoin</h1>
@@ -124,13 +124,13 @@
                                         <button class="btn btn-primary pull-centre" id="send" onclick="App.SendCoins()">Send Coins</button>
                                         <br>
                                         <br>
-                                        <!--<span id="SendCoins"></span>-->
+                                        <span id="SendCoins"></span>
                                         <!--<h3>You have sent  <span id="SendCoins"></span> Coins </h3>-->
                                         <br>
                                         <br>
 
                                         <br>
-                                        <h1>Check Employee Balance</h1>
+                                        <h1>Check RapidCoin</h1>
                                         <br>
                                         <label for="receiver">Account:</label>
                                         <input class="form-control" type="text" id="coinReceiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
@@ -140,7 +140,7 @@
                                         <br>
                                         <br>
 
-                                        <h3>Have <span id="checkBalance"></span> Coins</h3>
+                                        <h3>You Have sent <span id="checkBalance"></span> Coins</h3>
                                         <br>
                                     </p>
                                 </div>
@@ -165,9 +165,11 @@
                                         <button class="btn btn-primary pull-centre" id="send" onclick="App.SendShares()">Send Shares</button>
                                         <br>
                                         <br>
+                                        <span id="SendShares"></span>
                                         <br>
 
-                                        <h1>Check Employee Shares</h1>
+                                        <br>
+                                        <h1>Check Shares</h1>
                                         <br>
                                         <label for="shareReceiver">Account:</label>
                                         <input class="form-control" type="text" id="shareReceiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
@@ -176,7 +178,7 @@
                                         <button class="btn btn-primary pull-centre" id="shareSend" onclick="App.checkShares()">Check Shares</button>
                                         <br>
                                         <br>
-                                        <h3>Have <span id="sharesBalance"></span> %Shares</h3>
+                                        <h3>You Have Sent<span id="sharesBalance"></span> %Shares</h3>
                                         <br>
                                         <br>
                                     </p>
@@ -206,7 +208,7 @@
                                         <br>
                                         <br>
 
-                                        <h1>Check Employee Leaves</h1>
+                                        <h1>Check Leaves</h1>
                                         <br>
                                         <label for="receiver">Account:</label>
                                         <input class="form-control" type="text" id="leaveReceiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
@@ -215,7 +217,7 @@
                                         <button class="btn btn-primary pull-centre" id="send" onclick="App.checkLeaves()">Checkleaves</button>
                                         <br>
                                         <br>
-                                        <h3>Have <span id="checkLeaves"></span> Days Leaves</h3>
+                                        <h3>You Have Given <span id="checkLeaves"></span> Days Leaves</h3>
                                         <br>
                                         <br>
                                     </p>
@@ -235,12 +237,12 @@
                     <nav class="pull-left">
                         <ul>
                             <li>
-                                <a href="dashboard.html">
+                                <a href="#">
                                 Home
                             </a>
                             </li>
                             <li>
-                                <a href="http://www.rapidqube.com">
+                                <a href="rapidqube.com">
                                 Company
                             </a>
                             </li>
@@ -284,13 +286,4 @@
 
 <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 <script src="assets/js/demo.js"></script>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-
-        demo.initChartist();
-
-    });
-</script>
-
 </html>

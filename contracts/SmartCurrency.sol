@@ -1,17 +1,13 @@
 pragma solidity ^0.4.4;
 
     
-	
-
-    
-    contract SmartCurrency
-    {
-    mapping (address => coinWallet) shares; // stores data into contract address.
-    mapping (address => coinWallet) balances;
-    mapping (address => coinWallet) leaves;
-    mapping (address => coinWallet) shares1;
-    mapping (address => coinWallet) balances1;
-    mapping (address => coinWallet) leaves1; 
+    contract SmartCurrency {
+    mapping (address => uint256) public shares; // stores data into contract address.
+    mapping (address => uint256) public balances;
+    mapping (address => uint256) public leaves;
+    mapping (address => uint256) public Usershares; // stores data into contract address.
+    mapping (address => uint256) public Userbalances;
+    mapping (address => uint256) public Userleaves;
     mapping (address => string)  User_Email;
     mapping (address => string)  User_Password;
     mapping ( address => Usr )   Users;
@@ -26,11 +22,6 @@ pragma solidity ^0.4.4;
     string ethereum_address;
     
   }
-  struct coinWallet {
-	uint rapidcoin;
-	uint rapidshares;
-	uint rapidleaves;
-	}
     //events invoked when the function is called
 
     event Transfer(address indexed _from, address indexed _to, uint256 _value); //transfer amount from to receiver 
@@ -39,33 +30,32 @@ pragma solidity ^0.4.4;
     
     // stores the coin details
    function SmartCurrency(){
-        balances[msg.sender].rapidcoin= Resetbalance();
-        leaves[msg.sender].rapidleaves= ResetLeaves();
-        shares[msg.sender].rapidshares= ResetShares();
-        balances1[msg.sender].rapidcoin=0;
-        leaves1[msg.sender].rapidleaves=0;
-        shares1[msg.sender].rapidshares=0;
-
+        balances[tx.origin]= Resetbalance();
+        leaves[tx.origin]= ResetLeaves();
+        shares[tx.origin]= ResetShares(); 
+        Userbalances[tx.origin]=0;
+        Userleaves[tx.origin]=0;
+        Usershares[tx.origin]=0;      
     }
 
     function Resetbalance() returns (uint balance){
-        if(balances[msg.sender].rapidcoin<1){
-        balance=balances[msg.sender].rapidcoin+=1000;
+        if(balances[msg.sender]<1){
+        balance=balances[msg.sender]+=1000;
         return balance;
         }
         
     } 
     
     function ResetShares() returns (uint share){
-        if(shares[msg.sender].rapidshares<1){
-            share=shares[msg.sender].rapidshares+=100;
+        if(shares[msg.sender]<1){
+            share=shares[msg.sender]+=100;
         }
     }
     
     
     function ResetLeaves()returns (uint leave){
-        if (leaves[msg.sender].rapidleaves<1){
-            leave=leaves[msg.sender].rapidleaves+=100;
+        if (leaves[msg.sender]<1){
+            leave=leaves[msg.sender]+=100;
         }
     }  
 
@@ -105,50 +95,75 @@ pragma solidity ^0.4.4;
 
     
     function SendCoins(address receiver,uint amount)returns(bool sufficient){
-        if (balances[msg.sender].rapidcoin < amount) return false; // checks balance is not 0.
-        balances[msg.sender].rapidcoin -= amount; // deducts  balance from Sender.
-        balances[receiver].rapidcoin += amount; // increments  balance of  receiver.
+        if (balances[msg.sender] < amount) return false; // checks balance is not 0.
+        balances[msg.sender] -= amount; // deducts  balance from Sender.
+        balances[receiver] += amount; // increments  balance of  receiver.
         Transfer(msg.sender, receiver, amount); // event transfer gets called.
         return true;
     }
-
+    function SendCoinsUser(address receiver,uint amount)returns(bool sufficient){
+        if (Userbalances[msg.sender] < amount) return false; // checks balance is not 0.
+        Userbalances[msg.sender] -= amount; // deducts  balance from Sender.
+        Userbalances[receiver] += amount; // increments  balance of  receiver.
+        Transfer(msg.sender, receiver, amount); // event transfer gets called.
+        return true;
+    }
     
     function getBalance(address addr) returns(uint) {
-        return balances[addr].rapidcoin; // returns balance of reciever.
-    }
-
-    function getBalance1(address addr) returns(uint) {
-        return balances1[addr].rapidcoin; // returns balance of reciever.
-    }
+        return balances[addr]; // returns balance of reciever.
+       
+   }
      
+     function getUserBalance(address addr) returns(uint){
+         return Userbalances[addr];
+     }
     
     function SendShares(address receiver,uint amount)returns(bool sufficient){
-        if (shares[msg.sender].rapidshares < amount) return false; // checks shares is not 0.
-        shares[msg.sender].rapidshares -= amount;  // deducts  balance from Sender.
-        shares[receiver].rapidshares += amount;  // increments  balance of  receiver.
+        if (shares[msg.sender] < amount) return false; // checks shares is not 0.
+        shares[msg.sender] -= amount;  // deducts  balance from Sender.
+        shares[receiver] += amount;  // increments  balance of  receiver.
         Transfer(msg.sender, receiver, amount); // event transfer gets called.
         return true;
     }
 
+    function SendSharesUser(address receiver,uint amount)returns(bool sufficient){
+        if (Usershares[msg.sender] < amount) return false; // checks shares is not 0.
+        Usershares[msg.sender] -= amount;  // deducts  balance from Sender.
+        Usershares[receiver] += amount;  // increments  balance of  receiver.
+        Transfer(msg.sender, receiver, amount); // event transfer gets called.
+        return true;
+    }
     
     function checkshares(address addr) returns(uint) {
-        return shares1[addr].rapidshares; // returns shares  balance of reciever.
+        return shares[addr]; // returns shares  balance of reciever.
+    }
+
+    function checkUsershares(address addr) returns(uint) {
+        return Usershares[addr]; // returns shares  balance of reciever.
     }
 
     function GrantLeaves(address receiver,uint amount)returns(bool sufficient){
-         if(leaves[msg.sender].rapidleaves < amount) return false; // checks Leaves is not 0.
-         leaves[msg.sender].rapidleaves -= amount; // deducts  balance from Sender.
-         leaves[receiver].rapidleaves += amount;  // increments  balance of  receiver.
+         if(leaves[msg.sender] < amount) return false; // checks Leaves is not 0.
+         leaves[msg.sender] -= amount; // deducts  balance from Sender.
+         leaves[receiver] += amount;  // increments  balance of  receiver.
+         Transfer(msg.sender, receiver, amount); // event transfer gets called.
+         return true;
+        
+    }
+    function GrantLeavesUser(address receiver,uint amount)returns(bool sufficient){
+         if(Userleaves[msg.sender] < amount) return false; // checks Leaves is not 0.
+         Userleaves[msg.sender] -= amount; // deducts  balance from Sender.
+         Userleaves[receiver] += amount;  // increments  balance of  receiver.
          Transfer(msg.sender, receiver, amount); // event transfer gets called.
          return true;
         
     }
     
     function checkleaves(address addr) returns(uint) {        
-        return leaves[addr].rapidleaves; // returns Leaves  balance of reciever.
+        return leaves[addr]; // returns Leaves  balance of reciever.
     }
-function checkleaves1(address addr) returns(uint) {        
-        return leaves1[addr].rapidleaves; // returns Leaves  balance of reciever.
+    function checkUserleaves(address addr) returns(uint) {        
+        return Userleaves[addr]; // returns Leaves  balance of reciever.
     }
 }   
 

@@ -48,9 +48,9 @@ window.App = {
             self.refreshBalance();
             self.refreshShares();
             self.refreshLeaves();
-            self.refreshBalance1();
-            self.refreshShares2();
-            self.refreshLeaves3();
+            self.refreshUserBalance();
+            self.refreshUserShares();
+            self.refreshUserLeaves();
             //  self.refreshBalance3();
             // self.accountStatus();
         });
@@ -97,6 +97,7 @@ window.App = {
             // self.setStatus("Error getting balance; see log.");
         });
     },
+
     refreshLeaves: function() {
         var self = this;
 
@@ -115,18 +116,19 @@ window.App = {
             // self.setStatus("Error getting balance; see log.");
         });
     },
-    refreshBalance1: function() {
+
+    refreshUserBalance: function() {
         var self = this;
 
         var meta;
 
         SmartCurrency.deployed().then(function(instance) {
             meta = instance;
-            return meta.getBalance1.call(account, {
+            return meta.getUserBalance.call(account, {
                 from: account
             });
         }).then(function(value) {
-            var balance_element = document.getElementById("balance1");
+            var balance_element = document.getElementById("Userbalances");
             balance_element.innerHTML = value.valueOf();
             1
         }).catch(function(e) {
@@ -134,36 +136,36 @@ window.App = {
             // self.setStatus("Error getting balance; see log.");
         });
     },
-    refreshShares2: function() {
+    refreshUserShares: function() {
         var self = this;
 
         var meta;
 
         SmartCurrency.deployed().then(function(instance) {
             meta = instance;
-            return meta.checkshares1.call(account, {
+            return meta.checkUsershares.call(account, {
                 from: account
             });
         }).then(function(value) {
-            var balance_element = document.getElementById("shares1");
+            var balance_element = document.getElementById("Usershares");
             balance_element.innerHTML = value.valueOf();
         }).catch(function(e) {
             console.log(e);
             // self.setStatus("Error getting balance; see log.");
         });
     },
-    refreshLeaves3: function() {
+    refreshUserLeaves: function() {
         var self = this;
 
         var meta;
 
         SmartCurrency.deployed().then(function(instance) {
             meta = instance;
-            return meta.checkleaves1.call(account, {
+            return meta.checkUserleaves.call(account, {
                 from: account
             });
         }).then(function(value) {
-            var balance_element = document.getElementById("leaves1");
+            var balance_element = document.getElementById("Userleaves");
             balance_element.innerHTML = value.valueOf();
         }).catch(function(e) {
             console.log(e);
@@ -229,8 +231,8 @@ window.App = {
 
     AuthenticateUser: function LogIn() {
         var self = this;
-        var _email = document.getElementById("emailsignup").value;
-        var _password = document.getElementById("passwordsignup").value;
+        var _email = document.getElementById("emaillogin").value;
+        var _password = document.getElementById("passwordlogin").value;
         console.log("email :" + _email);
         console.log("password :" + _password);
         this.setStatus("Initiating ... please wait");
@@ -249,7 +251,7 @@ window.App = {
         }).then(function(value) {
             console.log("value :" + value);
             if (_email == "abc@admin.com") {
-                document.getElementById('send').onclick = function() {
+                document.getElementById('submit').onclick = function() {
                     location.href = "dashboard.html";
                 }
             } else {
@@ -343,8 +345,7 @@ window.App = {
                 from: account
             });
         }).then(function(value) {
-            var balance_element = document.getElementById("SendCoins");
-            balance_element.innerHTML = value.valueOf();
+            
             self.setStatus("Transaction complete!");
             self.refreshBalance();
 
@@ -460,7 +461,7 @@ window.App = {
             self.setStatus("Error getting balance; see log.");
         });
     },
-    SendCoin: function() {
+    SendCoinsUser: function() {
         var self = this;
 
         var amount = parseInt(document.getElementById("CoinAmount").value);
@@ -471,14 +472,13 @@ window.App = {
         var rapid;
         SmartCurrency.deployed().then(function(instance) {
             rapid = instance;
-            return rapid.SendCoin(receiver, amount, {
+            return rapid.SendCoinsUser(receiver, amount, {
                 from: account
             });
         }).then(function(value) {
-            var balance_element = document.getElementById("SendCoins");
-            balance_element.innerHTML = value.valueOf();
+           
             self.setStatus("Transaction complete!");
-            self.refreshBalance1();
+            self.refreshUserBalance();
 
         }).catch(function(e) {
             console.log(e);
@@ -494,7 +494,7 @@ window.App = {
             var coinAddress = document.getElementById("coinReceiver").value;
 
             console.log("Coin Address: " + coinAddress);
-            return rapid.getBalance1.call(coinAddress, {
+            return rapid.getUserBalance.call(coinAddress, {
                 from: account
             });
         }).then(function(value) {
@@ -506,7 +506,7 @@ window.App = {
         });
     },
 
-    SendShare: function() {
+    SendSharesUser: function() {
         var self = this;
 
         var amount = parseInt(document.getElementById("ShareAmount").value);
@@ -517,19 +517,19 @@ window.App = {
         var rapid;
         SmartCurrency.deployed().then(function(instance) {
             rapid = instance;
-            return rapid.SendShares(receiver, amount, {
+            return rapid.SendSharesUser(receiver, amount, {
                 from: account
             });
         }).then(function(value) {
             self.setStatus("Transaction complete!");
-            self.refreshShares1();
+            self.refreshUserShares();
         }).catch(function(e) {
             console.log(e);
             self.setStatus("Error sending coin; see log.");
         });
     },
 
-    checkShare: function() {
+    checkUsershares: function() {
         var self = this;
         var rapid;
         SmartCurrency.deployed().then(function(instance) {
@@ -537,7 +537,7 @@ window.App = {
             var shareAddress = document.getElementById("shareReceiver").value;
 
             console.log("Share Address: " + shareAddress);
-            return rapid.checkshares1.call(shareAddress, {
+            return rapid.checkUsershares.call(shareAddress, {
                 from: account
             });
         }).then(function(value) {
@@ -549,7 +549,7 @@ window.App = {
         });
     },
 
-    GrantLeave: function() {
+    GrantLeavesUser: function() {
         var self = this;
 
         var amount = parseInt(document.getElementById("LeaveAmount").value);
@@ -561,19 +561,19 @@ window.App = {
         var rapid;
         SmartCurrency.deployed().then(function(instance) {
             rapid = instance;
-            return rapid.GrantLeaves(receiver, amount, {
+            return rapid.GrantLeavesUser(receiver, amount, {
                 from: account
             });
         }).then(function(value) {
             self.setStatus("Transaction complete!");
-            self.refreshLeaves1();
+            self.refreshUserLeaves();
         }).catch(function(e) {
             console.log(e);
             self.setStatus("Error sending coin; see log.");
         });
     },
 
-    checkLeave: function() {
+    checkUserleaves: function() {
         var self = this;
         var rapid;
         SmartCurrency.deployed().then(function(instance) {
@@ -581,7 +581,7 @@ window.App = {
             var leaveAddress = document.getElementById("leaveReceiver").value;
 
             console.log("Leave Address: " + leaveAddress);
-            return rapid.checkleaves1.call(leaveAddress, {
+            return rapid.checkUserleaves.call(leaveAddress, {
                 from: account
             });
         }).then(function(value) {

@@ -2,12 +2,12 @@ pragma solidity ^0.4.4;
 
     
     contract SmartCurrency {
-    mapping (address => uint256) public shares; // stores data into contract address.
-    mapping (address => uint256) public balances;
-    mapping (address => uint256) public leaves;
-    mapping (address => uint256) public Usershares; // stores data into contract address.
-    mapping (address => uint256) public Userbalances;
-    mapping (address => uint256) public Userleaves;
+    mapping (address => uint256) shares; // stores data into contract address.
+    mapping (address => uint256) balances;
+    mapping (address => uint256) leaves;
+    mapping (address => uint256) Usershares; // stores data into contract address.
+    mapping (address => uint256) Userbalances;
+    mapping (address => uint256) Userleaves;
     mapping (address => string)  User_Email;
     mapping (address => string)  User_Password;
     mapping ( address => Usr )   Users;
@@ -101,6 +101,7 @@ pragma solidity ^0.4.4;
         Transfer(msg.sender, receiver, amount); // event transfer gets called.
         return true;
     }
+    
     function SendCoinsUser(address receiver,uint amount)returns(bool sufficient){
         if (Userbalances[msg.sender] < amount) return false; // checks balance is not 0.
         Userbalances[msg.sender] -= amount; // deducts  balance from Sender.

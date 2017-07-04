@@ -39,7 +39,8 @@
             <div class="sidebar-wrapper">
                 <div class="logo">
                     <a href="Register.html" class="simple-text">
-                    SmartCurrency
+                                                            Rapid Rise
+
                 </a>
                 </div>
 
@@ -126,6 +127,20 @@
                                     <!--<h3>You have sent  <span id="SendCoins"></span> Coins </h3>-->
                                     <br>
                                     <br>
+
+                                    <br>
+                                    <h1>Check RapidCoin</h1>
+                                    <br>
+                                    <label for="receiver">Account:</label>
+                                    <input class="form-control" type="text" id="coinReceiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
+                                    <br>
+                                    <br>
+                                    <button class="btn btn-primary pull-centre" id="send" onclick="App.checkBalances()">Check Coins</button>
+                                    <br>
+                                    <br>
+
+                                    <h3>You Have sent <span id="checkBalances"></span> Coins</h3>
+                                    <br>
                                 </p>
                             </div>
                             <div id="Shares" class="tab-pane fade">
@@ -151,6 +166,20 @@
                                     <br>
                                     <span id="SendShare"></span>
                                     <br>
+
+                                    <br>
+                                    <h1>Check Shares</h1>
+                                    <br>
+                                    <label for="shareReceiver">Account:</label>
+                                    <input class="form-control" type="text" id="shareReceiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
+                                    <br>
+                                    <br>
+                                    <button class="btn btn-primary pull-centre" id="shareSend" onclick="App.checkUsershares()">Check Shares</button>
+                                    <br>
+                                    <br>
+                                    <h3>You Have <span id="sharesBalance"></span> %Shares</h3>
+                                    <br>
+                                    <br>
                                 </p>
                             </div>
                             <div id="Leaves" class="tab-pane fade">
@@ -175,6 +204,19 @@
                                     <br>
                                     <br>
                                     <span id="GrantLeave"></span>
+                                    <br>
+                                    <br>
+
+                                    <h1>Check Leaves</h1>
+                                    <br>
+                                    <label for="receiver">Account:</label>
+                                    <input class="form-control" type="text" id="leaveReceiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
+                                    <br>
+                                    <br>
+                                    <button class="btn btn-primary pull-centre" id="send" onclick="App.checkUserleaves()">Checkleaves</button>
+                                    <br>
+                                    <br>
+                                    <h3>You Have <span id="checkLeaves"></span> Days Leaves</h3>
                                     <br>
                                     <br>
                                 </p>

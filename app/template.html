@@ -43,7 +43,7 @@
             <div class="sidebar-wrapper">
                 <div class="logo">
                     <a href="template.html" class="simple-text">
-                    SmartCurrency
+                    Rapid Rise
                 </a>
                 </div>
 
@@ -92,11 +92,8 @@
                     <div class="row">
                         <div class="container">
                             <table>
-                                <!--<form action="login.html">-->
 
-                                <form id="submit_form" href="login.html">
-                                    <!--<a href="GenerateAddress.html" class="to_register"></a>-->
-
+                                <form action="login.html" id="submit_form">
                                     <br>
                                     <label for="email" class="youmail"> Email: </label>
                                     <input class="youmail" id="emailsignup" name="email" required="required" type="email" placeholder="email" />
@@ -110,7 +107,7 @@
                                     <input type="text" id="address" name="ethaddress" placeholder="ethereum Address"></input>
                                     <br>
                                     <br>
-                                    <button class="btn btn-primary" id="submit" name="submit" value="submit" onclick="App.AddressGenerator()">Register</button>
+                                    <button class="btn btn-primary" id="submit" name="submit" value="submit" onclick="App.RegisterUser()">Register</button>
                                     <br>
                                     <br> Before Registration Please Get Your ethereum address
                                     <a href="Eth_address.html" class="to_register"> Get It Now </a>
@@ -118,8 +115,9 @@
                                     <br>
                                     <span id="status"></span>
                                     <br>
+
                                 </form>
-                                <!--</form>-->
+
                             </table>
                         </div class="container">
                     </div>

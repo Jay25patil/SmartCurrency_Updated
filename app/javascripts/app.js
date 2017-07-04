@@ -194,15 +194,14 @@ window.App = {
         }).then(function(value) {
             console.log("value :" + value);
 
-            if (value == true) {
 
-                alert("Registration Successfull!.... Please Login");
-                //self.redirect('Employee.html');
-            } else {
-                alert("Registration Unsuccessfull!");
+            alert("Registration Successfull!.... Please Login");
+            document.getElementById('submit').onclick = function() {
+                location.href = "login .html";
+
             }
 
-            //self.redirect('/Login.html');
+
         }).catch(function(e) {
             //console.log(e);
             self.setStatus("User Already Exist! Try Diffrent Email");
@@ -246,22 +245,17 @@ window.App = {
                 from: account
 
             });
-            console.log("ReturnValue: " + returnValue);
+
             return returnValue;
         }).then(function(value) {
-            console.log("value :" + value);
-            if (_email == "abc@admin.com") {
+
+            if (_email == "admin@rpqb.com") {
                 document.getElementById('submit').onclick = function() {
                     location.href = "dashboard.html";
                 }
             } else {
                 location.href = "user.html";
             }
-
-
-            //self.redirect('/Employee');
-
-            //self.refreshBalance3();
 
         }).catch(function(value) {
             console.log(value);
@@ -282,7 +276,7 @@ window.App = {
         }).then(function(value) {
             var balance_element = document.getElementById("balance");
             balance_element.innerHTML = value.valueOf();
-            //self.refreshBalance();
+
         }).catch(function(e) {
             console.log(e);
             self.setStatus("Error getting balance; see log.");
@@ -302,7 +296,7 @@ window.App = {
         }).then(function(value) {
             var balance_element = document.getElementById("shares");
             balance_element.innerHTML = value.valueOf();
-            //self.refreshShares();
+
         }).catch(function(e) {
             console.log(e);
             self.setStatus("Error getting balance; see log.");
@@ -321,7 +315,7 @@ window.App = {
         }).then(function(value) {
             var balance_element = document.getElementById("leaves");
             balance_element.innerHTML = value.valueOf();
-            //self.refreshLeaves();
+
 
         }).catch(function(e) {
             console.log(e);
@@ -335,7 +329,7 @@ window.App = {
 
         var amount = parseInt(document.getElementById("CoinAmount").value);
         var receiver = document.getElementById("sendCoinReceiver").value;
-
+        console.log("Coinreciever:" + receiver);
         this.setStatus("Initiating transaction... (please wait)");
 
         var rapid;
@@ -345,7 +339,7 @@ window.App = {
                 from: account
             });
         }).then(function(value) {
-            
+
             self.setStatus("Transaction complete!");
             self.refreshBalance();
 
@@ -476,7 +470,7 @@ window.App = {
                 from: account
             });
         }).then(function(value) {
-           
+
             self.setStatus("Transaction complete!");
             self.refreshUserBalance();
 
